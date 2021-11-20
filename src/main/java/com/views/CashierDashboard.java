@@ -89,11 +89,37 @@ public class CashierDashboard extends javax.swing.JFrame {
         orderDetailsTablePanel = new javax.swing.JScrollPane();
         orderDetailsTable = new javax.swing.JTable();
         viewCustomersPanel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        viewCustomersTitlePanel = new javax.swing.JPanel();
+        viewCustomersTitle = new javax.swing.JLabel();
+        customersTablePanel = new javax.swing.JPanel();
+        customersInfoTablePanel = new javax.swing.JScrollPane();
+        customersInfoTable = new javax.swing.JTable();
         addCustomerPanel = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        addCustomerTitlePanel = new javax.swing.JPanel();
+        addCustomerTitle = new javax.swing.JLabel();
+        customerDetailsFormPanel = new javax.swing.JPanel();
+        cusNamePanel = new javax.swing.JPanel();
+        cusNameLabel = new javax.swing.JLabel();
+        cusName = new javax.swing.JTextField();
+        addressPanel = new javax.swing.JPanel();
+        addressLabel = new javax.swing.JLabel();
+        cusAddress = new javax.swing.JTextField();
+        cusMobilePanel = new javax.swing.JPanel();
+        cusMobileLabel = new javax.swing.JLabel();
+        cusMobile = new javax.swing.JTextField();
+        addCusBtnPanel = new javax.swing.JPanel();
+        addCustomerBtn = new javax.swing.JButton();
         searchCustomerPanel = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        addCustomerTitlePanel1 = new javax.swing.JPanel();
+        addCustomerTitle1 = new javax.swing.JLabel();
+        customerDetailsFormPanel1 = new javax.swing.JPanel();
+        cusNamePanel1 = new javax.swing.JPanel();
+        cusNameLabel1 = new javax.swing.JLabel();
+        cusName1 = new javax.swing.JTextField();
+        addCusBtnPanel1 = new javax.swing.JPanel();
+        addCustomerBtn1 = new javax.swing.JButton();
         settingsPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -125,10 +151,10 @@ public class CashierDashboard extends javax.swing.JFrame {
         titlePanel.setLayout(titlePanelLayout);
         titlePanelLayout.setHorizontalGroup(
             titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(titlePanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(panelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(702, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titlePanelLayout.createSequentialGroup()
+                .addContainerGap(426, Short.MAX_VALUE)
+                .addComponent(panelTitle)
+                .addGap(410, 410, 410))
         );
         titlePanelLayout.setVerticalGroup(
             titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +186,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        itemsTable.setRowHeight(20);
+        itemsTable.setRowHeight(25);
         jScrollPane1.setViewportView(itemsTable);
 
         itemsPanel.add(jScrollPane1);
@@ -489,20 +515,20 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         orderDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order_ID", "Customer_Mobile", "Date", "Discount", "Points", "Total"
+                "Order_ID", "Customer_Mobile", "Date", "Items", "Discount", "Points", "Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Float.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, true, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -518,10 +544,16 @@ public class CashierDashboard extends javax.swing.JFrame {
         orderDetailsTable.setShowGrid(true);
         orderDetailsTablePanel.setViewportView(orderDetailsTable);
         if (orderDetailsTable.getColumnModel().getColumnCount() > 0) {
-            orderDetailsTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-            orderDetailsTable.getColumnModel().getColumn(3).setPreferredWidth(60);
+            orderDetailsTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            orderDetailsTable.getColumnModel().getColumn(0).setMaxWidth(100);
+            orderDetailsTable.getColumnModel().getColumn(2).setPreferredWidth(120);
+            orderDetailsTable.getColumnModel().getColumn(2).setMaxWidth(120);
             orderDetailsTable.getColumnModel().getColumn(4).setPreferredWidth(60);
-            orderDetailsTable.getColumnModel().getColumn(5).setPreferredWidth(60);
+            orderDetailsTable.getColumnModel().getColumn(4).setHeaderValue("Discount");
+            orderDetailsTable.getColumnModel().getColumn(5).setPreferredWidth(100);
+            orderDetailsTable.getColumnModel().getColumn(5).setMaxWidth(100);
+            orderDetailsTable.getColumnModel().getColumn(6).setPreferredWidth(60);
+            orderDetailsTable.getColumnModel().getColumn(6).setHeaderValue("Total");
         }
 
         salesTablePanel.add(orderDetailsTablePanel);
@@ -532,66 +564,324 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         cashierLayeredPane.add(viewSalesPanel, "card3");
 
-        jLabel4.setText("View Customers");
+        viewCustomersTitlePanel.setAlignmentX(5.0F);
+        viewCustomersTitlePanel.setAlignmentY(5.0F);
+        viewCustomersTitlePanel.setPreferredSize(new java.awt.Dimension(900, 50));
 
-        javax.swing.GroupLayout viewCustomersPanelLayout = new javax.swing.GroupLayout(viewCustomersPanel);
-        viewCustomersPanel.setLayout(viewCustomersPanelLayout);
-        viewCustomersPanelLayout.setHorizontalGroup(
-            viewCustomersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewCustomersPanelLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel4)
-                .addContainerGap(765, Short.MAX_VALUE))
+        viewCustomersTitle.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        viewCustomersTitle.setText("Customer Details");
+        viewCustomersTitle.setAlignmentX(1.0F);
+
+        javax.swing.GroupLayout viewCustomersTitlePanelLayout = new javax.swing.GroupLayout(viewCustomersTitlePanel);
+        viewCustomersTitlePanel.setLayout(viewCustomersTitlePanelLayout);
+        viewCustomersTitlePanelLayout.setHorizontalGroup(
+            viewCustomersTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewCustomersTitlePanelLayout.createSequentialGroup()
+                .addContainerGap(423, Short.MAX_VALUE)
+                .addComponent(viewCustomersTitle)
+                .addGap(361, 361, 361))
         );
-        viewCustomersPanelLayout.setVerticalGroup(
-            viewCustomersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewCustomersPanelLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jLabel4)
-                .addContainerGap(439, Short.MAX_VALUE))
+        viewCustomersTitlePanelLayout.setVerticalGroup(
+            viewCustomersTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewCustomersTitlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(viewCustomersTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        viewCustomersPanel.add(viewCustomersTitlePanel);
+
+        customersTablePanel.setPreferredSize(new java.awt.Dimension(900, 410));
+
+        customersInfoTablePanel.setPreferredSize(new java.awt.Dimension(900, 403));
+
+        customersInfoTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Customer_ID", "Name", "Mobile No.", "Address", "Points"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        customersInfoTable.setIntercellSpacing(new java.awt.Dimension(2, 2));
+        customersInfoTable.setRowHeight(20);
+        customersInfoTable.setShowGrid(true);
+        customersInfoTablePanel.setViewportView(customersInfoTable);
+        if (customersInfoTable.getColumnModel().getColumnCount() > 0) {
+            customersInfoTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            customersInfoTable.getColumnModel().getColumn(0).setMaxWidth(100);
+            customersInfoTable.getColumnModel().getColumn(2).setPreferredWidth(120);
+            customersInfoTable.getColumnModel().getColumn(2).setMaxWidth(120);
+            customersInfoTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+            customersInfoTable.getColumnModel().getColumn(4).setMaxWidth(100);
+        }
+
+        customersTablePanel.add(customersInfoTablePanel);
+
+        viewCustomersPanel.add(customersTablePanel);
 
         cashierLayeredPane.add(viewCustomersPanel, "card4");
 
-        jLabel5.setText("Add Customer Panel");
+        addCustomerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout addCustomerPanelLayout = new javax.swing.GroupLayout(addCustomerPanel);
-        addCustomerPanel.setLayout(addCustomerPanelLayout);
-        addCustomerPanelLayout.setHorizontalGroup(
-            addCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addCustomerPanelLayout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(jLabel5)
-                .addContainerGap(715, Short.MAX_VALUE))
+        addCustomerTitlePanel.setPreferredSize(new java.awt.Dimension(440, 50));
+
+        addCustomerTitle.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        addCustomerTitle.setText("Add New Customer");
+
+        javax.swing.GroupLayout addCustomerTitlePanelLayout = new javax.swing.GroupLayout(addCustomerTitlePanel);
+        addCustomerTitlePanel.setLayout(addCustomerTitlePanelLayout);
+        addCustomerTitlePanelLayout.setHorizontalGroup(
+            addCustomerTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addCustomerTitlePanelLayout.createSequentialGroup()
+                .addGap(155, 155, 155)
+                .addComponent(addCustomerTitle)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
-        addCustomerPanelLayout.setVerticalGroup(
-            addCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addCustomerPanelLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jLabel5)
-                .addContainerGap(403, Short.MAX_VALUE))
+        addCustomerTitlePanelLayout.setVerticalGroup(
+            addCustomerTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addCustomerTitlePanelLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(addCustomerTitle)
+                .addContainerGap())
         );
+
+        jPanel2.add(addCustomerTitlePanel);
+
+        customerDetailsFormPanel.setPreferredSize(new java.awt.Dimension(440, 250));
+
+        cusNameLabel.setText("Customer Name");
+
+        javax.swing.GroupLayout cusNamePanelLayout = new javax.swing.GroupLayout(cusNamePanel);
+        cusNamePanel.setLayout(cusNamePanelLayout);
+        cusNamePanelLayout.setHorizontalGroup(
+            cusNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cusNamePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cusNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cusNameLabel)
+                    .addComponent(cusName, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        cusNamePanelLayout.setVerticalGroup(
+            cusNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cusNamePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cusNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cusName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        addressLabel.setText("Address");
+
+        javax.swing.GroupLayout addressPanelLayout = new javax.swing.GroupLayout(addressPanel);
+        addressPanel.setLayout(addressPanelLayout);
+        addressPanelLayout.setHorizontalGroup(
+            addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addressPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addressLabel)
+                    .addComponent(cusAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        addressPanelLayout.setVerticalGroup(
+            addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addressPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(addressLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cusAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        cusMobileLabel.setText("Mobile No.");
+
+        javax.swing.GroupLayout cusMobilePanelLayout = new javax.swing.GroupLayout(cusMobilePanel);
+        cusMobilePanel.setLayout(cusMobilePanelLayout);
+        cusMobilePanelLayout.setHorizontalGroup(
+            cusMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cusMobilePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cusMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cusMobileLabel)
+                    .addComponent(cusMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        cusMobilePanelLayout.setVerticalGroup(
+            cusMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cusMobilePanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(cusMobileLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cusMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout customerDetailsFormPanelLayout = new javax.swing.GroupLayout(customerDetailsFormPanel);
+        customerDetailsFormPanel.setLayout(customerDetailsFormPanelLayout);
+        customerDetailsFormPanelLayout.setHorizontalGroup(
+            customerDetailsFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerDetailsFormPanelLayout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addGroup(customerDetailsFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cusMobilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cusNamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
+        );
+        customerDetailsFormPanelLayout.setVerticalGroup(
+            customerDetailsFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(customerDetailsFormPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(cusNamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(cusMobilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(customerDetailsFormPanel);
+
+        addCusBtnPanel.setPreferredSize(new java.awt.Dimension(440, 50));
+
+        addCustomerBtn.setText("Add Customer");
+
+        javax.swing.GroupLayout addCusBtnPanelLayout = new javax.swing.GroupLayout(addCusBtnPanel);
+        addCusBtnPanel.setLayout(addCusBtnPanelLayout);
+        addCusBtnPanelLayout.setHorizontalGroup(
+            addCusBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addCusBtnPanelLayout.createSequentialGroup()
+                .addContainerGap(61, Short.MAX_VALUE)
+                .addComponent(addCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
+        );
+        addCusBtnPanelLayout.setVerticalGroup(
+            addCusBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addCusBtnPanelLayout.createSequentialGroup()
+                .addComponent(addCustomerBtn)
+                .addGap(0, 25, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(addCusBtnPanel);
+
+        addCustomerPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 5, 460, 470));
 
         cashierLayeredPane.add(addCustomerPanel, "card5");
 
-        jLabel6.setText("searchCustomerPanel");
+        searchCustomerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout searchCustomerPanelLayout = new javax.swing.GroupLayout(searchCustomerPanel);
-        searchCustomerPanel.setLayout(searchCustomerPanelLayout);
-        searchCustomerPanelLayout.setHorizontalGroup(
-            searchCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchCustomerPanelLayout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jLabel6)
-                .addContainerGap(674, Short.MAX_VALUE))
+        addCustomerTitlePanel1.setPreferredSize(new java.awt.Dimension(440, 50));
+
+        addCustomerTitle1.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        addCustomerTitle1.setText("Search Customer by Mobile No");
+
+        javax.swing.GroupLayout addCustomerTitlePanel1Layout = new javax.swing.GroupLayout(addCustomerTitlePanel1);
+        addCustomerTitlePanel1.setLayout(addCustomerTitlePanel1Layout);
+        addCustomerTitlePanel1Layout.setHorizontalGroup(
+            addCustomerTitlePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addCustomerTitlePanel1Layout.createSequentialGroup()
+                .addGap(155, 155, 155)
+                .addComponent(addCustomerTitle1)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
-        searchCustomerPanelLayout.setVerticalGroup(
-            searchCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchCustomerPanelLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel6)
-                .addContainerGap(432, Short.MAX_VALUE))
+        addCustomerTitlePanel1Layout.setVerticalGroup(
+            addCustomerTitlePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addCustomerTitlePanel1Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(addCustomerTitle1)
+                .addContainerGap())
         );
+
+        jPanel3.add(addCustomerTitlePanel1);
+
+        customerDetailsFormPanel1.setPreferredSize(new java.awt.Dimension(440, 250));
+
+        cusNameLabel1.setText("Enter Customer Mobile No.");
+
+        javax.swing.GroupLayout cusNamePanel1Layout = new javax.swing.GroupLayout(cusNamePanel1);
+        cusNamePanel1.setLayout(cusNamePanel1Layout);
+        cusNamePanel1Layout.setHorizontalGroup(
+            cusNamePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cusNamePanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cusNamePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cusNameLabel1)
+                    .addComponent(cusName1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        cusNamePanel1Layout.setVerticalGroup(
+            cusNamePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cusNamePanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cusNameLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cusName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        javax.swing.GroupLayout customerDetailsFormPanel1Layout = new javax.swing.GroupLayout(customerDetailsFormPanel1);
+        customerDetailsFormPanel1.setLayout(customerDetailsFormPanel1Layout);
+        customerDetailsFormPanel1Layout.setHorizontalGroup(
+            customerDetailsFormPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerDetailsFormPanel1Layout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addComponent(cusNamePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
+        );
+        customerDetailsFormPanel1Layout.setVerticalGroup(
+            customerDetailsFormPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(customerDetailsFormPanel1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(cusNamePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(165, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(customerDetailsFormPanel1);
+
+        addCusBtnPanel1.setPreferredSize(new java.awt.Dimension(440, 50));
+
+        addCustomerBtn1.setText("Add Customer");
+
+        javax.swing.GroupLayout addCusBtnPanel1Layout = new javax.swing.GroupLayout(addCusBtnPanel1);
+        addCusBtnPanel1.setLayout(addCusBtnPanel1Layout);
+        addCusBtnPanel1Layout.setHorizontalGroup(
+            addCusBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addCusBtnPanel1Layout.createSequentialGroup()
+                .addContainerGap(61, Short.MAX_VALUE)
+                .addComponent(addCustomerBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
+        );
+        addCusBtnPanel1Layout.setVerticalGroup(
+            addCusBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addCusBtnPanel1Layout.createSequentialGroup()
+                .addComponent(addCustomerBtn1)
+                .addGap(0, 25, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(addCusBtnPanel1);
+
+        searchCustomerPanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 5, 460, 470));
 
         cashierLayeredPane.add(searchCustomerPanel, "card6");
 
@@ -778,18 +1068,43 @@ public class CashierDashboard extends javax.swing.JFrame {
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel addCusBtnPanel;
+    private javax.swing.JPanel addCusBtnPanel1;
+    private javax.swing.JButton addCustomerBtn;
+    private javax.swing.JButton addCustomerBtn1;
     private javax.swing.JPanel addCustomerPanel;
+    private javax.swing.JLabel addCustomerTitle;
+    private javax.swing.JLabel addCustomerTitle1;
+    private javax.swing.JPanel addCustomerTitlePanel;
+    private javax.swing.JPanel addCustomerTitlePanel1;
     private javax.swing.JCheckBox addDiscountCheck;
     private javax.swing.JButton addItemBtn;
     private javax.swing.JButton addPointsBtn;
     private javax.swing.JPanel addPointsPanel;
+    private javax.swing.JLabel addressLabel;
+    private javax.swing.JPanel addressPanel;
     private javax.swing.JLayeredPane cashierLayeredPane;
     private javax.swing.JButton checkoutBtn;
     private javax.swing.JPanel checkoutBtnPanel;
     private javax.swing.JPanel checkoutPanel;
+    private javax.swing.JTextField cusAddress;
+    private javax.swing.JTextField cusMobile;
+    private javax.swing.JLabel cusMobileLabel;
     private javax.swing.JTextField cusMobileNo;
+    private javax.swing.JPanel cusMobilePanel;
     private javax.swing.JLabel cusMobilleLabel;
+    private javax.swing.JTextField cusName;
+    private javax.swing.JTextField cusName1;
+    private javax.swing.JLabel cusNameLabel;
+    private javax.swing.JLabel cusNameLabel1;
+    private javax.swing.JPanel cusNamePanel;
+    private javax.swing.JPanel cusNamePanel1;
+    private javax.swing.JPanel customerDetailsFormPanel;
+    private javax.swing.JPanel customerDetailsFormPanel1;
     private javax.swing.JPanel customerDetailsPanel;
+    private javax.swing.JTable customersInfoTable;
+    private javax.swing.JScrollPane customersInfoTablePanel;
+    private javax.swing.JPanel customersTablePanel;
     private javax.swing.JPanel cutomerMobilePanel;
     private javax.swing.JLabel discount;
     private javax.swing.JPanel discountCheckPanel;
@@ -800,9 +1115,6 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel grossTotalPanel;
     private javax.swing.JPanel itemsPanel;
     private javax.swing.JTable itemsTable;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -816,6 +1128,8 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable orderDetailsTable;
     private javax.swing.JScrollPane orderDetailsTablePanel;
@@ -840,6 +1154,8 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel totalPointsPanel;
     private javax.swing.JPanel totalSummaryPanel;
     private javax.swing.JPanel viewCustomersPanel;
+    private javax.swing.JLabel viewCustomersTitle;
+    private javax.swing.JPanel viewCustomersTitlePanel;
     private javax.swing.JPanel viewSalesPanel;
     // End of variables declaration//GEN-END:variables
 }
