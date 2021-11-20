@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author BiGDoGKD
  */
-public class userModel {
+public class UserModel {
     private static Database db;
     private static ResultSet res;
 
@@ -26,8 +26,9 @@ public class userModel {
         System.out.println(db.executeUpdate());
 
         //Example Select Query
-        db.query("SELECT * from user");
-        ResultSet res = db.executeQuery();
+        db.query("SELECT * from user where name = ?");
+        db.bindString(1,"sandun");
+        res = db.executeQuery();
         while(res.next()){
             System.out.println(res.getString("name"));
         }
