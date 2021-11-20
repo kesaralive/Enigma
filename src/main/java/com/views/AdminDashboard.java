@@ -5,7 +5,16 @@
  */
 package com.views;
 
+import com.controllers.CashierController;
+import java.awt.event.HierarchyEvent;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -42,8 +51,20 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         addCashierPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        nameField = new javax.swing.JTextField();
+        mobileField = new javax.swing.JTextField();
+        addressField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JPasswordField();
+        usernameField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        addCashierBtn = new javax.swing.JButton();
         viewCashiersPanel = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        cashierTable = new javax.swing.JTable();
         addProductPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         viewProductsPanel = new javax.swing.JPanel();
@@ -80,14 +101,14 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(viewSalesPanelLayout.createSequentialGroup()
                 .addGap(231, 231, 231)
                 .addComponent(jLabel2)
-                .addContainerGap(329, Short.MAX_VALUE))
+                .addContainerGap(459, Short.MAX_VALUE))
         );
         viewSalesPanelLayout.setVerticalGroup(
             viewSalesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewSalesPanelLayout.createSequentialGroup()
                 .addGap(119, 119, 119)
                 .addComponent(jLabel2)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         panelLayer.add(viewSalesPanel, "card4");
@@ -103,7 +124,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(viewCustomersPanelLayout.createSequentialGroup()
                 .addGap(253, 253, 253)
                 .addComponent(jButton1)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap(414, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewCustomersPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
@@ -112,7 +133,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         viewCustomersPanelLayout.setVerticalGroup(
             viewCustomersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewCustomersPanelLayout.createSequentialGroup()
-                .addContainerGap(127, Short.MAX_VALUE)
+                .addContainerGap(117, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(80, 80, 80)
                 .addComponent(jButton1)
@@ -130,56 +151,179 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(searchCustomerPanelLayout.createSequentialGroup()
                 .addGap(226, 226, 226)
                 .addComponent(jLabel1)
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addContainerGap(428, Short.MAX_VALUE))
         );
         searchCustomerPanelLayout.setVerticalGroup(
             searchCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchCustomerPanelLayout.createSequentialGroup()
                 .addGap(137, 137, 137)
                 .addComponent(jLabel1)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
 
         panelLayer.add(searchCustomerPanel, "card2");
 
-        jLabel4.setText("add cashier panel");
+        jLabel4.setFont(new java.awt.Font("Helvetica", 1, 12)); // NOI18N
+        jLabel4.setText("Add New Cashier");
+
+        nameField.setPreferredSize(new java.awt.Dimension(800, 30));
+        nameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameFieldActionPerformed(evt);
+            }
+        });
+
+        mobileField.setPreferredSize(new java.awt.Dimension(800, 30));
+
+        addressField.setPreferredSize(new java.awt.Dimension(800, 30));
+        addressField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addressFieldActionPerformed(evt);
+            }
+        });
+
+        passwordField.setPreferredSize(new java.awt.Dimension(800, 30));
+
+        usernameField.setPreferredSize(new java.awt.Dimension(800, 30));
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        jLabel9.setText("Username");
+
+        jLabel10.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        jLabel10.setText("Name");
+
+        jLabel11.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        jLabel11.setText("Mobile No");
+
+        jLabel13.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        jLabel13.setText("Password");
+
+        jLabel14.setText("Address");
+
+        addCashierBtn.setText("Add Cashier");
+        addCashierBtn.setPreferredSize(new java.awt.Dimension(500, 30));
+        addCashierBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCashierBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addCashierPanelLayout = new javax.swing.GroupLayout(addCashierPanel);
         addCashierPanel.setLayout(addCashierPanelLayout);
         addCashierPanelLayout.setHorizontalGroup(
             addCashierPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addCashierPanelLayout.createSequentialGroup()
-                .addGap(284, 284, 284)
+                .addGroup(addCashierPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addCashierPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(addCashierPanelLayout.createSequentialGroup()
+                        .addGroup(addCashierPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(addCashierPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(addCashierPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11)
+                                    .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14)))
+                            .addGroup(addCashierPanelLayout.createSequentialGroup()
+                                .addGap(143, 143, 143)
+                                .addComponent(addCashierBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(addCashierPanelLayout.createSequentialGroup()
+                .addGap(313, 313, 313)
                 .addComponent(jLabel4)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         addCashierPanelLayout.setVerticalGroup(
             addCashierPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addCashierPanelLayout.createSequentialGroup()
-                .addGap(168, 168, 168)
-                .addComponent(jLabel4)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(addCashierBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelLayer.add(addCashierPanel, "card5");
 
-        jLabel5.setText("view cashiers panel");
+        cashierTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Username", "Name", "Mobile", "Address"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        cashierTable.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                cashierTableHierarchyChanged(evt);
+            }
+        });
+        cashierTable.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                cashierTableComponentShown(evt);
+            }
+        });
+        jScrollPane1.setViewportView(cashierTable);
 
         javax.swing.GroupLayout viewCashiersPanelLayout = new javax.swing.GroupLayout(viewCashiersPanel);
         viewCashiersPanel.setLayout(viewCashiersPanelLayout);
         viewCashiersPanelLayout.setHorizontalGroup(
             viewCashiersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewCashiersPanelLayout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(jLabel5)
-                .addContainerGap(322, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
         );
         viewCashiersPanelLayout.setVerticalGroup(
             viewCashiersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewCashiersPanelLayout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(jLabel5)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         panelLayer.add(viewCashiersPanel, "card6");
@@ -193,14 +337,14 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(addProductPanelLayout.createSequentialGroup()
                 .addGap(265, 265, 265)
                 .addComponent(jLabel6)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(388, Short.MAX_VALUE))
         );
         addProductPanelLayout.setVerticalGroup(
             addProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addProductPanelLayout.createSequentialGroup()
                 .addGap(151, 151, 151)
                 .addComponent(jLabel6)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
         panelLayer.add(addProductPanel, "card7");
@@ -214,14 +358,14 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(viewProductsPanelLayout.createSequentialGroup()
                 .addGap(221, 221, 221)
                 .addComponent(jLabel7)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addContainerGap(423, Short.MAX_VALUE))
         );
         viewProductsPanelLayout.setVerticalGroup(
             viewProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewProductsPanelLayout.createSequentialGroup()
                 .addGap(119, 119, 119)
                 .addComponent(jLabel7)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         panelLayer.add(viewProductsPanel, "card8");
@@ -235,19 +379,19 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addGap(225, 225, 225)
                 .addComponent(jLabel8)
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addContainerGap(448, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addComponent(jLabel8)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
 
         panelLayer.add(settingsPanel, "card9");
 
-        getContentPane().add(panelLayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 390));
+        getContentPane().add(panelLayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 740, 380));
 
         jMenu1.setText("Sales");
 
@@ -390,6 +534,70 @@ public class AdminDashboard extends javax.swing.JFrame {
         switchPanels(viewProductsPanel);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameFieldActionPerformed
+
+    private void addressFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addressFieldActionPerformed
+
+    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameFieldActionPerformed
+
+    private void addCashierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCashierBtnActionPerformed
+        // TODO add your handling code here:
+        CashierController cc = new CashierController();
+        String password = new String(passwordField.getPassword());
+        cc.setName(nameField.getText());
+        cc.setAddress(addressField.getText());
+        cc.setMobile(mobileField.getText());
+        cc.setUsername(usernameField.getText());
+        cc.setPassword(password);
+        
+        try {
+            if(cc.createCashier()){
+                JOptionPane.showMessageDialog(null,"Cashier added successfully!");
+            }else{
+                JOptionPane.showMessageDialog(null,"Action failed");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_addCashierBtnActionPerformed
+
+    private void cashierTableComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_cashierTableComponentShown
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cashierTableComponentShown
+
+    private void cashierTableHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_cashierTableHierarchyChanged
+        // TODO add your handling code here:
+        if((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && cashierTable.isShowing()){
+            try {
+            List<CashierController> cashiers = CashierController.viewCashiers();
+            DefaultTableModel dtm = (DefaultTableModel) cashierTable.getModel();
+            dtm.setRowCount(0);
+            if(cashiers != null){
+                for(CashierController cashier : cashiers){
+                    Object[] data = {
+                        cashier.getId(),
+                        cashier.getName(),
+                        cashier.getUsername(),
+                        cashier.getMobile(),
+                        cashier.getAddress()
+                    };
+                    dtm.addRow(data);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        } 
+    }//GEN-LAST:event_cashierTableHierarchyChanged
+
     /**
      * @param args the command line arguments
      */
@@ -433,17 +641,24 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addCashierBtn;
     private javax.swing.JPanel addCashierPanel;
     private javax.swing.JPanel addProductPanel;
+    private javax.swing.JTextField addressField;
+    private javax.swing.JTable cashierTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -459,9 +674,14 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField mobileField;
+    private javax.swing.JTextField nameField;
     private javax.swing.JLayeredPane panelLayer;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JPanel searchCustomerPanel;
     private javax.swing.JPanel settingsPanel;
+    private javax.swing.JTextField usernameField;
     private javax.swing.JPanel viewCashiersPanel;
     private javax.swing.JPanel viewCustomersPanel;
     private javax.swing.JPanel viewProductsPanel;
