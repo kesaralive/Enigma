@@ -115,13 +115,59 @@ public class CashierDashboard extends javax.swing.JFrame {
         addCustomerTitlePanel1 = new javax.swing.JPanel();
         addCustomerTitle1 = new javax.swing.JLabel();
         customerDetailsFormPanel1 = new javax.swing.JPanel();
-        cusNamePanel1 = new javax.swing.JPanel();
-        cusNameLabel1 = new javax.swing.JLabel();
-        cusName1 = new javax.swing.JTextField();
+        cusSearchInputPanel = new javax.swing.JPanel();
+        enterMobileNoLabel = new javax.swing.JLabel();
+        cusMobileInput = new javax.swing.JTextField();
+        cusSearchBtnPanel = new javax.swing.JPanel();
+        searchCustomerBtn = new javax.swing.JButton();
         addCusBtnPanel1 = new javax.swing.JPanel();
-        addCustomerBtn1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        cusIDSearchResult = new javax.swing.JLabel();
+        cusIDLabel = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        cusNameSearchResult = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        cusAddressSearchResult = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        cusPointsSearchResult = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        clearDetailsPanel = new javax.swing.JPanel();
+        clearInfoBtn = new javax.swing.JButton();
         settingsPanel = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        left = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        cashMobile = new javax.swing.JLabel();
+        cashName = new javax.swing.JLabel();
+        cashAddress = new javax.swing.JLabel();
+        right = new javax.swing.JPanel();
+        rightTopPanel = new javax.swing.JPanel();
+        myNamePanel = new javax.swing.JPanel();
+        myNameLabel = new javax.swing.JLabel();
+        myName = new javax.swing.JTextField();
+        myAddressPanel = new javax.swing.JPanel();
+        myAddressLabel = new javax.swing.JLabel();
+        myAddress = new javax.swing.JTextField();
+        myMobilePanel = new javax.swing.JPanel();
+        myMobileLabel = new javax.swing.JLabel();
+        myMobile = new javax.swing.JTextField();
+        myInfoActionPanel = new javax.swing.JPanel();
+        saveChangesBtn = new javax.swing.JButton();
+        cancelChangesBtn = new javax.swing.JButton();
+        rightBottomPanel = new javax.swing.JPanel();
+        currentPasswordPanel = new javax.swing.JPanel();
+        currPasswordLabel = new javax.swing.JLabel();
+        currPassword = new javax.swing.JPasswordField();
+        newPasswordPanel = new javax.swing.JPanel();
+        newPasswordLabel = new javax.swing.JLabel();
+        newPassword = new javax.swing.JPasswordField();
+        confPasswordPanel = new javax.swing.JPanel();
+        confPasswordLabel = new javax.swing.JLabel();
+        confPassword = new javax.swing.JPasswordField();
+        myPasswordActionPanel = new javax.swing.JPanel();
+        saveNewPasswordBtn = new javax.swing.JButton();
+        cancelPasswordChangeBtn = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -221,9 +267,9 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         orderSummaryPanel.setPreferredSize(new java.awt.Dimension(350, 520));
 
-        customerDetailsPanel.setPreferredSize(new java.awt.Dimension(350, 100));
+        customerDetailsPanel.setPreferredSize(new java.awt.Dimension(350, 130));
 
-        cutomerMobilePanel.setPreferredSize(new java.awt.Dimension(321, 30));
+        cutomerMobilePanel.setPreferredSize(new java.awt.Dimension(321, 40));
 
         cusMobilleLabel.setText("Customer Mobile No:");
 
@@ -252,7 +298,7 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         customerDetailsPanel.add(cutomerMobilePanel);
 
-        totalPointsPanel.setPreferredSize(new java.awt.Dimension(321, 30));
+        totalPointsPanel.setPreferredSize(new java.awt.Dimension(321, 40));
 
         totalPointsLabel.setText("Total Points:");
 
@@ -279,7 +325,7 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         customerDetailsPanel.add(totalPointsPanel);
 
-        addPointsPanel.setPreferredSize(new java.awt.Dimension(321, 30));
+        addPointsPanel.setPreferredSize(new java.awt.Dimension(321, 40));
 
         addPointsBtn.setText("Add Points");
 
@@ -459,16 +505,16 @@ public class CashierDashboard extends javax.swing.JFrame {
         checkoutBtnPanelLayout.setHorizontalGroup(
             checkoutBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkoutBtnPanelLayout.createSequentialGroup()
-                .addContainerGap(186, Short.MAX_VALUE)
+                .addContainerGap(187, Short.MAX_VALUE)
                 .addComponent(checkoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(23, 23, 23))
         );
         checkoutBtnPanelLayout.setVerticalGroup(
             checkoutBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(checkoutBtnPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addContainerGap()
                 .addComponent(checkoutBtn)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         orderSummaryPanel.add(checkoutBtnPanel);
@@ -794,7 +840,7 @@ public class CashierDashboard extends javax.swing.JFrame {
         addCustomerTitlePanel1.setPreferredSize(new java.awt.Dimension(440, 50));
 
         addCustomerTitle1.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
-        addCustomerTitle1.setText("Search Customer by Mobile No");
+        addCustomerTitle1.setText("Search Customer");
 
         javax.swing.GroupLayout addCustomerTitlePanel1Layout = new javax.swing.GroupLayout(addCustomerTitlePanel1);
         addCustomerTitlePanel1.setLayout(addCustomerTitlePanel1Layout);
@@ -803,7 +849,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(addCustomerTitlePanel1Layout.createSequentialGroup()
                 .addGap(155, 155, 155)
                 .addComponent(addCustomerTitle1)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         addCustomerTitlePanel1Layout.setVerticalGroup(
             addCustomerTitlePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -815,94 +861,491 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         jPanel3.add(addCustomerTitlePanel1);
 
-        customerDetailsFormPanel1.setPreferredSize(new java.awt.Dimension(440, 250));
+        customerDetailsFormPanel1.setPreferredSize(new java.awt.Dimension(440, 280));
 
-        cusNameLabel1.setText("Enter Customer Mobile No.");
+        enterMobileNoLabel.setText("Enter Customer Mobile No.");
 
-        javax.swing.GroupLayout cusNamePanel1Layout = new javax.swing.GroupLayout(cusNamePanel1);
-        cusNamePanel1.setLayout(cusNamePanel1Layout);
-        cusNamePanel1Layout.setHorizontalGroup(
-            cusNamePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cusNamePanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout cusSearchInputPanelLayout = new javax.swing.GroupLayout(cusSearchInputPanel);
+        cusSearchInputPanel.setLayout(cusSearchInputPanelLayout);
+        cusSearchInputPanelLayout.setHorizontalGroup(
+            cusSearchInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cusSearchInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(cusNamePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cusNameLabel1)
-                    .addComponent(cusName1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(cusSearchInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(enterMobileNoLabel)
+                    .addComponent(cusMobileInput, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-        cusNamePanel1Layout.setVerticalGroup(
-            cusNamePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cusNamePanel1Layout.createSequentialGroup()
+        cusSearchInputPanelLayout.setVerticalGroup(
+            cusSearchInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cusSearchInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cusNameLabel1)
+                .addComponent(enterMobileNoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cusName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cusMobileInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
-        javax.swing.GroupLayout customerDetailsFormPanel1Layout = new javax.swing.GroupLayout(customerDetailsFormPanel1);
-        customerDetailsFormPanel1.setLayout(customerDetailsFormPanel1Layout);
-        customerDetailsFormPanel1Layout.setHorizontalGroup(
-            customerDetailsFormPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerDetailsFormPanel1Layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
-                .addComponent(cusNamePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+        customerDetailsFormPanel1.add(cusSearchInputPanel);
+
+        searchCustomerBtn.setText("Search Customer");
+
+        javax.swing.GroupLayout cusSearchBtnPanelLayout = new javax.swing.GroupLayout(cusSearchBtnPanel);
+        cusSearchBtnPanel.setLayout(cusSearchBtnPanelLayout);
+        cusSearchBtnPanelLayout.setHorizontalGroup(
+            cusSearchBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cusSearchBtnPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(searchCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        customerDetailsFormPanel1Layout.setVerticalGroup(
-            customerDetailsFormPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customerDetailsFormPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(cusNamePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(165, Short.MAX_VALUE))
+        cusSearchBtnPanelLayout.setVerticalGroup(
+            cusSearchBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cusSearchBtnPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(searchCustomerBtn)
+                .addGap(20, 20, 20))
         );
+
+        customerDetailsFormPanel1.add(cusSearchBtnPanel);
+
+        addCusBtnPanel1.setPreferredSize(new java.awt.Dimension(325, 250));
+
+        cusIDLabel.setText("Customer ID:");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cusIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(cusIDSearchResult, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cusIDLabel)
+                    .addComponent(cusIDSearchResult, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
+        );
+
+        addCusBtnPanel1.add(jPanel4);
+
+        jLabel4.setText("Name:");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(cusNameSearchResult, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cusNameSearchResult, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
+        );
+
+        addCusBtnPanel1.add(jPanel5);
+
+        jLabel6.setText("Address:");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(cusAddressSearchResult, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(cusAddressSearchResult, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
+        );
+
+        addCusBtnPanel1.add(jPanel6);
+
+        jLabel9.setText("Total points:");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(cusPointsSearchResult, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cusPointsSearchResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
+        );
+
+        addCusBtnPanel1.add(jPanel7);
+
+        customerDetailsFormPanel1.add(addCusBtnPanel1);
 
         jPanel3.add(customerDetailsFormPanel1);
 
-        addCusBtnPanel1.setPreferredSize(new java.awt.Dimension(440, 50));
+        clearInfoBtn.setText("Clear Data");
 
-        addCustomerBtn1.setText("Add Customer");
-
-        javax.swing.GroupLayout addCusBtnPanel1Layout = new javax.swing.GroupLayout(addCusBtnPanel1);
-        addCusBtnPanel1.setLayout(addCusBtnPanel1Layout);
-        addCusBtnPanel1Layout.setHorizontalGroup(
-            addCusBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addCusBtnPanel1Layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
-                .addComponent(addCustomerBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
+        javax.swing.GroupLayout clearDetailsPanelLayout = new javax.swing.GroupLayout(clearDetailsPanel);
+        clearDetailsPanel.setLayout(clearDetailsPanelLayout);
+        clearDetailsPanelLayout.setHorizontalGroup(
+            clearDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clearDetailsPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(clearInfoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        addCusBtnPanel1Layout.setVerticalGroup(
-            addCusBtnPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addCusBtnPanel1Layout.createSequentialGroup()
-                .addComponent(addCustomerBtn1)
-                .addGap(0, 25, Short.MAX_VALUE))
+        clearDetailsPanelLayout.setVerticalGroup(
+            clearDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clearDetailsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(clearInfoBtn)
+                .addGap(20, 20, 20))
         );
 
-        jPanel3.add(addCusBtnPanel1);
+        jPanel3.add(clearDetailsPanel);
 
         searchCustomerPanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 5, 460, 470));
 
         cashierLayeredPane.add(searchCustomerPanel, "card6");
 
-        jLabel7.setText("settingsPanel");
+        settingsPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
-        settingsPanel.setLayout(settingsPanelLayout);
-        settingsPanelLayout.setHorizontalGroup(
-            settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGap(187, 187, 187)
-                .addComponent(jLabel7)
-                .addContainerGap(649, Short.MAX_VALUE))
+        left.setPreferredSize(new java.awt.Dimension(350, 500));
+
+        cashMobile.setText("+94 76 123 7895");
+
+        cashName.setText("John Doe");
+
+        cashAddress.setText("21, Jump Street.");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cashMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cashAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cashName, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
-        settingsPanelLayout.setVerticalGroup(
-            settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(jLabel7)
-                .addContainerGap(417, Short.MAX_VALUE))
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cashName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cashAddress)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cashMobile)
+                .addContainerGap())
         );
+
+        javax.swing.GroupLayout leftLayout = new javax.swing.GroupLayout(left);
+        left.setLayout(leftLayout);
+        leftLayout.setHorizontalGroup(
+            leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(leftLayout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(90, Short.MAX_VALUE))
+        );
+        leftLayout.setVerticalGroup(
+            leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(leftLayout.createSequentialGroup()
+                .addGap(194, 194, 194)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(213, Short.MAX_VALUE))
+        );
+
+        settingsPanel.add(left, java.awt.BorderLayout.WEST);
+
+        right.setPreferredSize(new java.awt.Dimension(550, 500));
+
+        rightTopPanel.setPreferredSize(new java.awt.Dimension(550, 200));
+
+        myNamePanel.setPreferredSize(new java.awt.Dimension(450, 52));
+
+        myNameLabel.setText("Name");
+
+        javax.swing.GroupLayout myNamePanelLayout = new javax.swing.GroupLayout(myNamePanel);
+        myNamePanel.setLayout(myNamePanelLayout);
+        myNamePanelLayout.setHorizontalGroup(
+            myNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myNamePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(myNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(myNamePanelLayout.createSequentialGroup()
+                        .addComponent(myNameLabel)
+                        .addGap(265, 411, Short.MAX_VALUE))
+                    .addGroup(myNamePanelLayout.createSequentialGroup()
+                        .addComponent(myName)
+                        .addContainerGap())))
+        );
+        myNamePanelLayout.setVerticalGroup(
+            myNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myNamePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(myNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(myName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        rightTopPanel.add(myNamePanel);
+
+        myAddressPanel.setPreferredSize(new java.awt.Dimension(450, 40));
+
+        myAddressLabel.setText("Address");
+
+        myAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myAddressActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout myAddressPanelLayout = new javax.swing.GroupLayout(myAddressPanel);
+        myAddressPanel.setLayout(myAddressPanelLayout);
+        myAddressPanelLayout.setHorizontalGroup(
+            myAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myAddressPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(myAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(myAddressPanelLayout.createSequentialGroup()
+                        .addComponent(myAddressLabel)
+                        .addGap(299, 396, Short.MAX_VALUE))
+                    .addGroup(myAddressPanelLayout.createSequentialGroup()
+                        .addComponent(myAddress)
+                        .addContainerGap())))
+        );
+        myAddressPanelLayout.setVerticalGroup(
+            myAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myAddressPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(myAddressLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(myAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        rightTopPanel.add(myAddressPanel);
+
+        myMobilePanel.setPreferredSize(new java.awt.Dimension(450, 56));
+
+        myMobileLabel.setText("Mobile No.");
+
+        javax.swing.GroupLayout myMobilePanelLayout = new javax.swing.GroupLayout(myMobilePanel);
+        myMobilePanel.setLayout(myMobilePanelLayout);
+        myMobilePanelLayout.setHorizontalGroup(
+            myMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myMobilePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(myMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(myMobilePanelLayout.createSequentialGroup()
+                        .addComponent(myMobileLabel)
+                        .addGap(292, 389, Short.MAX_VALUE))
+                    .addGroup(myMobilePanelLayout.createSequentialGroup()
+                        .addComponent(myMobile)
+                        .addContainerGap())))
+        );
+        myMobilePanelLayout.setVerticalGroup(
+            myMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myMobilePanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(myMobileLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(myMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        rightTopPanel.add(myMobilePanel);
+
+        myInfoActionPanel.setPreferredSize(new java.awt.Dimension(500, 40));
+
+        saveChangesBtn.setText("Save Changes");
+        saveChangesBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+
+        cancelChangesBtn.setText("Cancel");
+        cancelChangesBtn.setMaximumSize(new java.awt.Dimension(75, 25));
+        cancelChangesBtn.setMinimumSize(new java.awt.Dimension(75, 25));
+        cancelChangesBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+
+        javax.swing.GroupLayout myInfoActionPanelLayout = new javax.swing.GroupLayout(myInfoActionPanel);
+        myInfoActionPanel.setLayout(myInfoActionPanelLayout);
+        myInfoActionPanelLayout.setHorizontalGroup(
+            myInfoActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myInfoActionPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(125, 125, 125)
+                .addComponent(cancelChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+        myInfoActionPanelLayout.setVerticalGroup(
+            myInfoActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myInfoActionPanelLayout.createSequentialGroup()
+                .addGroup(myInfoActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 15, Short.MAX_VALUE))
+        );
+
+        rightTopPanel.add(myInfoActionPanel);
+
+        right.add(rightTopPanel);
+
+        rightBottomPanel.setPreferredSize(new java.awt.Dimension(550, 230));
+
+        currPasswordLabel.setText("Current Password");
+
+        javax.swing.GroupLayout currentPasswordPanelLayout = new javax.swing.GroupLayout(currentPasswordPanel);
+        currentPasswordPanel.setLayout(currentPasswordPanelLayout);
+        currentPasswordPanelLayout.setHorizontalGroup(
+            currentPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(currentPasswordPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(currentPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(currentPasswordPanelLayout.createSequentialGroup()
+                        .addComponent(currPasswordLabel)
+                        .addGap(265, 349, Short.MAX_VALUE))
+                    .addGroup(currentPasswordPanelLayout.createSequentialGroup()
+                        .addComponent(currPassword)
+                        .addContainerGap())))
+        );
+        currentPasswordPanelLayout.setVerticalGroup(
+            currentPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(currentPasswordPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(currPasswordLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(currPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        rightBottomPanel.add(currentPasswordPanel);
+
+        newPasswordPanel.setPreferredSize(new java.awt.Dimension(450, 40));
+
+        newPasswordLabel.setText("New Password");
+
+        javax.swing.GroupLayout newPasswordPanelLayout = new javax.swing.GroupLayout(newPasswordPanel);
+        newPasswordPanel.setLayout(newPasswordPanelLayout);
+        newPasswordPanelLayout.setHorizontalGroup(
+            newPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newPasswordPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(newPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newPasswordPanelLayout.createSequentialGroup()
+                        .addComponent(newPasswordLabel)
+                        .addGap(299, 362, Short.MAX_VALUE))
+                    .addGroup(newPasswordPanelLayout.createSequentialGroup()
+                        .addComponent(newPassword)
+                        .addContainerGap())))
+        );
+        newPasswordPanelLayout.setVerticalGroup(
+            newPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newPasswordPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(newPasswordLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(newPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        rightBottomPanel.add(newPasswordPanel);
+
+        confPasswordPanel.setPreferredSize(new java.awt.Dimension(450, 56));
+
+        confPasswordLabel.setText("Confirm Password");
+
+        javax.swing.GroupLayout confPasswordPanelLayout = new javax.swing.GroupLayout(confPasswordPanel);
+        confPasswordPanel.setLayout(confPasswordPanelLayout);
+        confPasswordPanelLayout.setHorizontalGroup(
+            confPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(confPasswordPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(confPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(confPasswordPanelLayout.createSequentialGroup()
+                        .addComponent(confPasswordLabel)
+                        .addGap(292, 348, Short.MAX_VALUE))
+                    .addGroup(confPasswordPanelLayout.createSequentialGroup()
+                        .addComponent(confPassword)
+                        .addContainerGap())))
+        );
+        confPasswordPanelLayout.setVerticalGroup(
+            confPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(confPasswordPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(confPasswordLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(confPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        rightBottomPanel.add(confPasswordPanel);
+
+        myPasswordActionPanel.setPreferredSize(new java.awt.Dimension(500, 56));
+
+        saveNewPasswordBtn.setText("Save Changes");
+        saveNewPasswordBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+
+        cancelPasswordChangeBtn.setText("Cancel");
+        cancelPasswordChangeBtn.setMaximumSize(new java.awt.Dimension(75, 25));
+        cancelPasswordChangeBtn.setMinimumSize(new java.awt.Dimension(75, 25));
+        cancelPasswordChangeBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+
+        javax.swing.GroupLayout myPasswordActionPanelLayout = new javax.swing.GroupLayout(myPasswordActionPanel);
+        myPasswordActionPanel.setLayout(myPasswordActionPanelLayout);
+        myPasswordActionPanelLayout.setHorizontalGroup(
+            myPasswordActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myPasswordActionPanelLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(saveNewPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addComponent(cancelPasswordChangeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
+        );
+        myPasswordActionPanelLayout.setVerticalGroup(
+            myPasswordActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myPasswordActionPanelLayout.createSequentialGroup()
+                .addGroup(myPasswordActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveNewPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelPasswordChangeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 31, Short.MAX_VALUE))
+        );
+
+        rightBottomPanel.add(myPasswordActionPanel);
+
+        right.add(rightBottomPanel);
+
+        settingsPanel.add(right, java.awt.BorderLayout.CENTER);
 
         cashierLayeredPane.add(settingsPanel, "card7");
 
@@ -1025,6 +1468,10 @@ public class CashierDashboard extends javax.swing.JFrame {
         model.addRow(new Object[]{});
     }//GEN-LAST:event_addItemBtnActionPerformed
 
+    private void myAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myAddressActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1071,7 +1518,6 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel addCusBtnPanel;
     private javax.swing.JPanel addCusBtnPanel1;
     private javax.swing.JButton addCustomerBtn;
-    private javax.swing.JButton addCustomerBtn1;
     private javax.swing.JPanel addCustomerPanel;
     private javax.swing.JLabel addCustomerTitle;
     private javax.swing.JLabel addCustomerTitle1;
@@ -1083,22 +1529,40 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel addPointsPanel;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JPanel addressPanel;
+    private javax.swing.JButton cancelChangesBtn;
+    private javax.swing.JButton cancelPasswordChangeBtn;
+    private javax.swing.JLabel cashAddress;
+    private javax.swing.JLabel cashMobile;
+    private javax.swing.JLabel cashName;
     private javax.swing.JLayeredPane cashierLayeredPane;
     private javax.swing.JButton checkoutBtn;
     private javax.swing.JPanel checkoutBtnPanel;
     private javax.swing.JPanel checkoutPanel;
+    private javax.swing.JPanel clearDetailsPanel;
+    private javax.swing.JButton clearInfoBtn;
+    private javax.swing.JPasswordField confPassword;
+    private javax.swing.JLabel confPasswordLabel;
+    private javax.swing.JPanel confPasswordPanel;
+    private javax.swing.JPasswordField currPassword;
+    private javax.swing.JLabel currPasswordLabel;
+    private javax.swing.JPanel currentPasswordPanel;
     private javax.swing.JTextField cusAddress;
+    private javax.swing.JLabel cusAddressSearchResult;
+    private javax.swing.JLabel cusIDLabel;
+    private javax.swing.JLabel cusIDSearchResult;
     private javax.swing.JTextField cusMobile;
+    private javax.swing.JTextField cusMobileInput;
     private javax.swing.JLabel cusMobileLabel;
     private javax.swing.JTextField cusMobileNo;
     private javax.swing.JPanel cusMobilePanel;
     private javax.swing.JLabel cusMobilleLabel;
     private javax.swing.JTextField cusName;
-    private javax.swing.JTextField cusName1;
     private javax.swing.JLabel cusNameLabel;
-    private javax.swing.JLabel cusNameLabel1;
     private javax.swing.JPanel cusNamePanel;
-    private javax.swing.JPanel cusNamePanel1;
+    private javax.swing.JLabel cusNameSearchResult;
+    private javax.swing.JLabel cusPointsSearchResult;
+    private javax.swing.JPanel cusSearchBtnPanel;
+    private javax.swing.JPanel cusSearchInputPanel;
     private javax.swing.JPanel customerDetailsFormPanel;
     private javax.swing.JPanel customerDetailsFormPanel1;
     private javax.swing.JPanel customerDetailsPanel;
@@ -1110,12 +1574,15 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel discountCheckPanel;
     private javax.swing.JLabel discountLabel;
     private javax.swing.JPanel discountPanel;
+    private javax.swing.JLabel enterMobileNoLabel;
     private javax.swing.JLabel grossTotal;
     private javax.swing.JLabel grossTotalLabel;
     private javax.swing.JPanel grossTotalPanel;
     private javax.swing.JPanel itemsPanel;
     private javax.swing.JTable itemsTable;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -1128,9 +1595,29 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel left;
+    private javax.swing.JTextField myAddress;
+    private javax.swing.JLabel myAddressLabel;
+    private javax.swing.JPanel myAddressPanel;
+    private javax.swing.JPanel myInfoActionPanel;
+    private javax.swing.JTextField myMobile;
+    private javax.swing.JLabel myMobileLabel;
+    private javax.swing.JPanel myMobilePanel;
+    private javax.swing.JTextField myName;
+    private javax.swing.JLabel myNameLabel;
+    private javax.swing.JPanel myNamePanel;
+    private javax.swing.JPanel myPasswordActionPanel;
+    private javax.swing.JPasswordField newPassword;
+    private javax.swing.JLabel newPasswordLabel;
+    private javax.swing.JPanel newPasswordPanel;
     private javax.swing.JTable orderDetailsTable;
     private javax.swing.JScrollPane orderDetailsTablePanel;
     private javax.swing.JPanel orderDetailsTitlePanel;
@@ -1141,8 +1628,14 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel pointsLabel;
     private javax.swing.JPanel pointsPanel;
     private javax.swing.JTextField pointsToAdd;
+    private javax.swing.JPanel right;
+    private javax.swing.JPanel rightBottomPanel;
+    private javax.swing.JPanel rightTopPanel;
     private javax.swing.JPanel salesPanel;
     private javax.swing.JPanel salesTablePanel;
+    private javax.swing.JButton saveChangesBtn;
+    private javax.swing.JButton saveNewPasswordBtn;
+    private javax.swing.JButton searchCustomerBtn;
     private javax.swing.JPanel searchCustomerPanel;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JLabel subtotal;
