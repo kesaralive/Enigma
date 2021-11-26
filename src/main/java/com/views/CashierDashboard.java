@@ -523,6 +523,7 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         cashierLayeredPane.add(checkoutPanel, "card2");
 
+        viewSalesPanel.setPreferredSize(new java.awt.Dimension(900, 500));
         viewSalesPanel.setLayout(new java.awt.BorderLayout(10, 10));
 
         salesPanel.setPreferredSize(new java.awt.Dimension(900, 520));
