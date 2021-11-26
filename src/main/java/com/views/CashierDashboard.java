@@ -813,6 +813,11 @@ public class CashierDashboard extends javax.swing.JFrame {
         addCusBtnPanel.setPreferredSize(new java.awt.Dimension(440, 50));
 
         addCustomerBtn.setText("Add Customer");
+        addCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCustomerBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addCusBtnPanelLayout = new javax.swing.GroupLayout(addCusBtnPanel);
         addCusBtnPanel.setLayout(addCusBtnPanelLayout);
@@ -1472,6 +1477,10 @@ public class CashierDashboard extends javax.swing.JFrame {
     private void myAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myAddressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_myAddressActionPerformed
+
+    private void addCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerBtnActionPerformed
+       
+    }//GEN-LAST:event_addCustomerBtnActionPerformed
 
     /**
      * @param args the command line arguments
