@@ -36,7 +36,7 @@ public class SelectLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(900, 520));
 
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         selectAdmin.setText("Administrator");
         selectAdmin.addActionListener(new java.awt.event.ActionListener() {
