@@ -78,5 +78,6 @@ public class Database {
     //returns the prepared Statement for usage of other JDBC methods
     public PreparedStatement getStatement() throws  SQLException{
         return statement;
-    }    
+    }
+
 }
