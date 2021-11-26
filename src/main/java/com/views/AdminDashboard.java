@@ -6,6 +6,7 @@
 package com.views;
 
 import com.controllers.CashierController;
+import com.controllers.ProductController;
 import java.awt.event.HierarchyEvent;
 import java.sql.SQLException;
 import java.util.List;
@@ -66,8 +67,14 @@ public class AdminDashboard extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         cashierTable = new javax.swing.JTable();
         addProductPanel = new javax.swing.JPanel();
+        productName = new javax.swing.JTextField();
+        productPrice = new javax.swing.JTextField();
+        addProduct = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         viewProductsPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        productTable = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         settingsPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -328,44 +335,123 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         panelLayer.add(viewCashiersPanel, "card6");
 
-        jLabel6.setText("add product panel");
+        productName.setFont(new java.awt.Font("Helvetica", 1, 12)); // NOI18N
+        productName.setPreferredSize(new java.awt.Dimension(200, 30));
+        productName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productNameActionPerformed(evt);
+            }
+        });
+
+        productPrice.setFont(new java.awt.Font("Helvetica", 1, 12)); // NOI18N
+        productPrice.setPreferredSize(new java.awt.Dimension(200, 30));
+
+        addProduct.setFont(new java.awt.Font("Helvetica", 1, 12)); // NOI18N
+        addProduct.setText("Add Product");
+        addProduct.setPreferredSize(new java.awt.Dimension(200, 30));
+        addProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProductActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Helvetica", 1, 12)); // NOI18N
+        jLabel5.setText("Product Name");
+
+        jLabel6.setFont(new java.awt.Font("Helvetica", 1, 12)); // NOI18N
+        jLabel6.setText("Product Price (LKR)");
 
         javax.swing.GroupLayout addProductPanelLayout = new javax.swing.GroupLayout(addProductPanel);
         addProductPanel.setLayout(addProductPanelLayout);
         addProductPanelLayout.setHorizontalGroup(
             addProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addProductPanelLayout.createSequentialGroup()
-                .addGap(265, 265, 265)
-                .addComponent(jLabel6)
-                .addContainerGap(388, Short.MAX_VALUE))
+                .addGroup(addProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(addProduct, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(addProductPanelLayout.createSequentialGroup()
+                        .addGroup(addProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(productName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(addProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(productPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
         addProductPanelLayout.setVerticalGroup(
             addProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addProductPanelLayout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(jLabel6)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addGroup(addProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(addProductPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(productName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(addProductPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(productPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(addProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(237, Short.MAX_VALUE))
         );
 
         panelLayer.add(addProductPanel, "card7");
 
-        jLabel7.setText("view products panel");
+        productTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Product ID", "Product Name", "Product Price"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        productTable.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                productTableHierarchyChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(productTable);
+
+        jLabel7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel7.setText("Products");
 
         javax.swing.GroupLayout viewProductsPanelLayout = new javax.swing.GroupLayout(viewProductsPanel);
         viewProductsPanel.setLayout(viewProductsPanelLayout);
         viewProductsPanelLayout.setHorizontalGroup(
             viewProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewProductsPanelLayout.createSequentialGroup()
-                .addGap(221, 221, 221)
-                .addComponent(jLabel7)
-                .addContainerGap(423, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(viewProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                    .addGroup(viewProductsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         viewProductsPanelLayout.setVerticalGroup(
             viewProductsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewProductsPanelLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel7)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         panelLayer.add(viewProductsPanel, "card8");
@@ -598,6 +684,51 @@ public class AdminDashboard extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_cashierTableHierarchyChanged
 
+    private void addProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductActionPerformed
+        // TODO add your handling code here:
+        ProductController pc = new ProductController();
+        pc.setName(productName.getText());
+        pc.setPrice(productPrice.getText());
+        
+        try {
+            if(pc.createProduct()){
+                JOptionPane.showMessageDialog(null,"Product added successfully!");
+            }else{
+                JOptionPane.showMessageDialog(null,"Action failed");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_addProductActionPerformed
+
+    private void productNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productNameActionPerformed
+
+    private void productTableHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_productTableHierarchyChanged
+        // TODO add your handling code here:
+        //PRODUCT TABLE
+        if((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && productTable.isShowing()){
+            try {
+            List<ProductController> products = ProductController.viewProducts();
+            DefaultTableModel dtm = (DefaultTableModel) productTable.getModel();
+            dtm.setRowCount(0);
+            if(products != null){
+                for(ProductController product : products){
+                    Object[] data = {
+                        product.getId(),
+                        product.getName(),
+                        product.getPrice()
+                    };
+                    dtm.addRow(data);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_productTableHierarchyChanged
+
     /**
      * @param args the command line arguments
      */
@@ -643,6 +774,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCashierBtn;
     private javax.swing.JPanel addCashierPanel;
+    private javax.swing.JButton addProduct;
     private javax.swing.JPanel addProductPanel;
     private javax.swing.JTextField addressField;
     private javax.swing.JTable cashierTable;
@@ -655,6 +787,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -675,10 +808,14 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField mobileField;
     private javax.swing.JTextField nameField;
     private javax.swing.JLayeredPane panelLayer;
     private javax.swing.JPasswordField passwordField;
+    private javax.swing.JTextField productName;
+    private javax.swing.JTextField productPrice;
+    private javax.swing.JTable productTable;
     private javax.swing.JPanel searchCustomerPanel;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JTextField usernameField;
