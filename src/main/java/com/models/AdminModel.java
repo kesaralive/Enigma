@@ -21,7 +21,7 @@ public class AdminModel {
     public static void main(String[] args) throws SQLException {
     }
 
-    public static Boolean login(String username, String password) throws SQLException {
+    public static boolean login(String username, String password) throws SQLException {
         db = new Database();
         db.query("SELECT * from admin where username = ? and password = ?");
         db.bindString(1,username);
@@ -30,6 +30,8 @@ public class AdminModel {
         return res.next();
     }
 
+
+    //create cashier
     public static Boolean createCashier(String[] cashier) throws SQLException {
         db = new Database();
         db.query("INSERT INTO cashier (username, name, mobile, address, password) VALUES(?,?,?,?,?)");
@@ -45,6 +47,20 @@ public class AdminModel {
         }
     }
 
+    //create product
+    public static Boolean createProduct(String[] product) throws  SQLException{
+        db = new Database();
+        db.query("INSERT INTO product (name, price) VALUES(?,?)");
+        db.bindString(1,product[0]);
+        db.bindString(2,product[1]);
+        if(db.executeUpdate()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //view all cashiers
     public List<CashierController> getCashiers() throws SQLException {
         db = new Database();
         db.query("SELECT * FROM cashier");

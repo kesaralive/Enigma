@@ -1024,6 +1024,12 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         myMobileLabel.setText("Mobile No.");
 
+        myMobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                myMobileKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout myMobilePanelLayout = new javax.swing.GroupLayout(myMobilePanel);
         myMobilePanel.setLayout(myMobilePanelLayout);
         myMobilePanelLayout.setHorizontalGroup(
@@ -1535,6 +1541,14 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void myAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myAddressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_myAddressActionPerformed
+
+    private void myMobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_myMobileKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_myMobileKeyTyped
 
     /**
      * @param args the command line arguments

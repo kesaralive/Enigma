@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a03c378b-a287-4f30-920c-6860ec67937e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/controllers/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/models/AdminModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/libraries/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/libraries/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/models/userModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/models/UserModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/config/Config.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/config/Config.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/controllers/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/controllers/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/libraries/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/libraries/Database.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/models/userModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/models/userModel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/controllers/ProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/models/ProductModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/models/AdminModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/models/AdminModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/views/AdminDashboard.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/views/AdminDashboard.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/views/AdminDashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/views/AdminDashboard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +27,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="21A9FGlSBhE7y1usKvPX0O6ZEqD" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -39,7 +44,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="Application.AdminModel">
     <configuration name="AdminController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -113,6 +122,10 @@
       <updated>1637372922921</updated>
       <workItem from="1637372925211" duration="4060000" />
       <workItem from="1637403591467" duration="5823000" />
+      <workItem from="1637614775668" duration="615000" />
+      <workItem from="1637934823502" duration="49000" />
+      <workItem from="1637934899161" duration="110000" />
+      <workItem from="1637935025104" duration="2984000" />
     </task>
     <servers />
   </component>
