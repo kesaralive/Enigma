@@ -6,6 +6,7 @@
 package com.views;
 
 import com.controllers.CashierController;
+import com.controllers.ProductController;
 import java.awt.event.ActionEvent;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.KeyEvent;
@@ -119,7 +120,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         viewCashiersTitle1 = new javax.swing.JLabel();
         cashiersTablePanel1 = new javax.swing.JPanel();
         cashiersInfoTablePanel1 = new javax.swing.JScrollPane();
-        cashiersInfoTable1 = new javax.swing.JTable();
+        productsInfoTable = new javax.swing.JTable();
         settingsPanel = new javax.swing.JPanel();
         left = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -695,8 +696,6 @@ public class AdminDashboard extends javax.swing.JFrame {
             cashiersInfoTable.getColumnModel().getColumn(6).setMinWidth(150);
             cashiersInfoTable.getColumnModel().getColumn(6).setPreferredWidth(150);
             cashiersInfoTable.getColumnModel().getColumn(6).setMaxWidth(150);
-            cashiersInfoTable.getColumnModel().getColumn(6).setCellEditor(null);
-            cashiersInfoTable.getColumnModel().getColumn(6).setCellRenderer(null);
         }
 
         cashiersTablePanel.add(cashiersInfoTablePanel);
@@ -822,6 +821,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         addProductBtnPanel.setPreferredSize(new java.awt.Dimension(440, 50));
 
         addProductBtn.setText("Add Product");
+        addProductBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProductBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addProductBtnPanelLayout = new javax.swing.GroupLayout(addProductBtnPanel);
         addProductBtnPanel.setLayout(addProductBtnPanelLayout);
@@ -877,7 +881,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         cashiersInfoTablePanel1.setPreferredSize(new java.awt.Dimension(600, 403));
 
-        cashiersInfoTable1.setModel(new javax.swing.table.DefaultTableModel(
+        productsInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -886,7 +890,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, true
@@ -900,20 +904,25 @@ public class AdminDashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        cashiersInfoTable1.setIntercellSpacing(new java.awt.Dimension(2, 2));
-        cashiersInfoTable1.setRowHeight(20);
-        cashiersInfoTable1.setShowGrid(true);
-        cashiersInfoTablePanel1.setViewportView(cashiersInfoTable1);
-        if (cashiersInfoTable1.getColumnModel().getColumnCount() > 0) {
-            cashiersInfoTable1.getColumnModel().getColumn(0).setMinWidth(100);
-            cashiersInfoTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-            cashiersInfoTable1.getColumnModel().getColumn(0).setMaxWidth(100);
-            cashiersInfoTable1.getColumnModel().getColumn(2).setMinWidth(120);
-            cashiersInfoTable1.getColumnModel().getColumn(2).setPreferredWidth(120);
-            cashiersInfoTable1.getColumnModel().getColumn(2).setMaxWidth(120);
-            cashiersInfoTable1.getColumnModel().getColumn(3).setMinWidth(150);
-            cashiersInfoTable1.getColumnModel().getColumn(3).setPreferredWidth(150);
-            cashiersInfoTable1.getColumnModel().getColumn(3).setMaxWidth(150);
+        productsInfoTable.setIntercellSpacing(new java.awt.Dimension(2, 2));
+        productsInfoTable.setRowHeight(20);
+        productsInfoTable.setShowGrid(true);
+        productsInfoTable.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                productsInfoTableHierarchyChanged(evt);
+            }
+        });
+        cashiersInfoTablePanel1.setViewportView(productsInfoTable);
+        if (productsInfoTable.getColumnModel().getColumnCount() > 0) {
+            productsInfoTable.getColumnModel().getColumn(0).setMinWidth(100);
+            productsInfoTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+            productsInfoTable.getColumnModel().getColumn(0).setMaxWidth(100);
+            productsInfoTable.getColumnModel().getColumn(2).setMinWidth(120);
+            productsInfoTable.getColumnModel().getColumn(2).setPreferredWidth(120);
+            productsInfoTable.getColumnModel().getColumn(2).setMaxWidth(120);
+            productsInfoTable.getColumnModel().getColumn(3).setMinWidth(150);
+            productsInfoTable.getColumnModel().getColumn(3).setPreferredWidth(150);
+            productsInfoTable.getColumnModel().getColumn(3).setMaxWidth(150);
         }
 
         cashiersTablePanel1.add(cashiersInfoTablePanel1);
@@ -1621,6 +1630,48 @@ public class AdminDashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cashiersInfoTableHierarchyChanged
 
+    private void addProductBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductBtnActionPerformed
+        // TODO add your handling code here:
+        //ADD PRODUCT
+        ProductController pc = new ProductController();
+        pc.setName(productName.getText());
+        pc.setPrice(productPrice.getText());
+        try {
+            if (pc.createProduct()) {
+                JOptionPane.showMessageDialog(null, "Product created successfully!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Action failed");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_addProductBtnActionPerformed
+
+    private void productsInfoTableHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_productsInfoTableHierarchyChanged
+        // TODO add your handling code here:
+        //cashiersInfoTable
+        if ((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && productsInfoTable.isShowing()) {
+            try {
+                List<ProductController> products = ProductController.viewProducts();
+                DefaultTableModel dtm = (DefaultTableModel) productsInfoTable.getModel();
+                dtm.setRowCount(0);
+                if (products != null) {
+                    for (ProductController product : products) {
+                        Object[] data = {
+                            product.getId(),
+                            product.getName(),
+                            product.getPrice(),
+                            "delete"
+                        };
+                        dtm.addRow(data);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_productsInfoTableHierarchyChanged
+
 
 // 
 //ButtonColumn buttonColumn = new ButtonColumn(table, delete, 2);
@@ -1701,7 +1752,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JTextField cashUsername;
     private javax.swing.JPanel cashierDetailsFormPanel;
     private javax.swing.JTable cashiersInfoTable;
-    private javax.swing.JTable cashiersInfoTable1;
     private javax.swing.JScrollPane cashiersInfoTablePanel;
     private javax.swing.JScrollPane cashiersInfoTablePanel1;
     private javax.swing.JPanel cashiersTablePanel;
@@ -1782,6 +1832,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JTextField productPrice;
     private javax.swing.JLabel productPriceLabel;
     private javax.swing.JPanel productPricePanel;
+    private javax.swing.JTable productsInfoTable;
     private javax.swing.JPanel right;
     private javax.swing.JPanel rightBottomPanel;
     private javax.swing.JPanel rightTopPanel;
