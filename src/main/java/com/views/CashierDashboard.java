@@ -5,9 +5,17 @@
  */
 package com.views;
 
+import com.controllers.CashierController;
+import com.controllers.CustomerController;
+import java.awt.event.HierarchyEvent;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -280,7 +288,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(cutomerMobilePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cusMobilleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(cusMobileNo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -309,7 +317,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(totalPointsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(totalPointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(totalPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -336,7 +344,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(addPointsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pointsToAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(addPointsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -396,7 +404,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(subtotalPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(subtotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -423,7 +431,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(discountPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(discountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(discount, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -450,7 +458,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(pointsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(points, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -478,7 +486,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(grossTotalPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(grossTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(grossTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -644,10 +652,7 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         customersInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Customer_ID", "Name", "Mobile No.", "Address", "Points"
@@ -671,15 +676,12 @@ public class CashierDashboard extends javax.swing.JFrame {
         customersInfoTable.setIntercellSpacing(new java.awt.Dimension(2, 2));
         customersInfoTable.setRowHeight(20);
         customersInfoTable.setShowGrid(true);
+        customersInfoTable.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                customersInfoTableHierarchyChanged(evt);
+            }
+        });
         customersInfoTablePanel.setViewportView(customersInfoTable);
-        if (customersInfoTable.getColumnModel().getColumnCount() > 0) {
-            customersInfoTable.getColumnModel().getColumn(0).setPreferredWidth(100);
-            customersInfoTable.getColumnModel().getColumn(0).setMaxWidth(100);
-            customersInfoTable.getColumnModel().getColumn(2).setPreferredWidth(120);
-            customersInfoTable.getColumnModel().getColumn(2).setMaxWidth(120);
-            customersInfoTable.getColumnModel().getColumn(4).setPreferredWidth(100);
-            customersInfoTable.getColumnModel().getColumn(4).setMaxWidth(100);
-        }
 
         customersTablePanel.add(customersInfoTablePanel);
 
@@ -789,7 +791,7 @@ public class CashierDashboard extends javax.swing.JFrame {
         customerDetailsFormPanelLayout.setHorizontalGroup(
             customerDetailsFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerDetailsFormPanelLayout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addContainerGap(51, Short.MAX_VALUE)
                 .addGroup(customerDetailsFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cusMobilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -895,6 +897,11 @@ public class CashierDashboard extends javax.swing.JFrame {
         customerDetailsFormPanel1.add(cusSearchInputPanel);
 
         searchCustomerBtn.setText("Search Customer");
+        searchCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchCustomerBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cusSearchBtnPanelLayout = new javax.swing.GroupLayout(cusSearchBtnPanel);
         cusSearchBtnPanel.setLayout(cusSearchBtnPanelLayout);
@@ -1083,7 +1090,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(leftLayout.createSequentialGroup()
                 .addGap(89, 89, 89)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         leftLayout.setVerticalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1112,7 +1119,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(myNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(myNamePanelLayout.createSequentialGroup()
                         .addComponent(myNameLabel)
-                        .addGap(265, 411, Short.MAX_VALUE))
+                        .addGap(265, 413, Short.MAX_VALUE))
                     .addGroup(myNamePanelLayout.createSequentialGroup()
                         .addComponent(myName)
                         .addContainerGap())))
@@ -1148,7 +1155,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(myAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(myAddressPanelLayout.createSequentialGroup()
                         .addComponent(myAddressLabel)
-                        .addGap(299, 396, Short.MAX_VALUE))
+                        .addGap(299, 401, Short.MAX_VALUE))
                     .addGroup(myAddressPanelLayout.createSequentialGroup()
                         .addComponent(myAddress)
                         .addContainerGap())))
@@ -1178,7 +1185,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(myMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(myMobilePanelLayout.createSequentialGroup()
                         .addComponent(myMobileLabel)
-                        .addGap(292, 389, Short.MAX_VALUE))
+                        .addGap(292, 390, Short.MAX_VALUE))
                     .addGroup(myMobilePanelLayout.createSequentialGroup()
                         .addComponent(myMobile)
                         .addContainerGap())))
@@ -1271,7 +1278,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(newPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(newPasswordPanelLayout.createSequentialGroup()
                         .addComponent(newPasswordLabel)
-                        .addGap(299, 362, Short.MAX_VALUE))
+                        .addGap(299, 370, Short.MAX_VALUE))
                     .addGroup(newPasswordPanelLayout.createSequentialGroup()
                         .addComponent(newPassword)
                         .addContainerGap())))
@@ -1300,7 +1307,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(confPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(confPasswordPanelLayout.createSequentialGroup()
                         .addComponent(confPasswordLabel)
-                        .addGap(292, 348, Short.MAX_VALUE))
+                        .addGap(292, 354, Short.MAX_VALUE))
                     .addGroup(confPasswordPanelLayout.createSequentialGroup()
                         .addComponent(confPassword)
                         .addContainerGap())))
@@ -1479,8 +1486,62 @@ public class CashierDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_myAddressActionPerformed
 
     private void addCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerBtnActionPerformed
-       
+        // TODO add your handling code here:
+        CustomerController cc = new CustomerController();
+        cc.setName(cusName.getText());
+        cc.setAddress(cusAddress.getText());
+        cc.setMobile(cusMobile.getText());
+        try {
+            if (cc.createCustomer()) {
+                JOptionPane.showMessageDialog(null, "Customer added successfully!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Action failed");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_addCustomerBtnActionPerformed
+
+    private void customersInfoTableHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_customersInfoTableHierarchyChanged
+        // TODO add your handling code here:
+                //Customer Info
+        if ((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && customersInfoTable.isShowing()) {
+            try {
+                List<CustomerController> customers = CustomerController.viewCustomers();
+                DefaultTableModel dtm = (DefaultTableModel) customersInfoTable.getModel();
+                dtm.setRowCount(0);
+                if (customers != null) {
+                    for (CustomerController customer : customers) {
+                        Object[] data = {
+                            customer.getId(),
+                            customer.getName(),
+                            customer.getMobile(),
+                            customer.getAddress(),
+                            customer.getPoints(),
+                        };
+                        dtm.addRow(data);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_customersInfoTableHierarchyChanged
+
+    private void searchCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchCustomerBtnActionPerformed
+        // TODO add your handling code here:
+        CustomerController cc = new CustomerController();
+        try {
+            CustomerController customer = cc.searchCustomer(cusMobileInput.getText());
+            cusIDSearchResult.setText(customer.getId().toString());
+            cusNameSearchResult.setText(customer.getName());
+            cusAddressSearchResult.setText(customer.getAddress());
+            cusPointsSearchResult.setText(customer.getPoints().toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_searchCustomerBtnActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,6 +6,7 @@
 package com.views;
 
 import com.controllers.CashierController;
+import com.controllers.CustomerController;
 import com.controllers.ProductController;
 import java.awt.event.ActionEvent;
 import java.awt.event.HierarchyEvent;
@@ -1311,6 +1312,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         customersInfoTable.setIntercellSpacing(new java.awt.Dimension(2, 2));
         customersInfoTable.setRowHeight(20);
         customersInfoTable.setShowGrid(true);
+        customersInfoTable.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                customersInfoTableHierarchyChanged(evt);
+            }
+        });
         customersInfoTablePanel.setViewportView(customersInfoTable);
 
         customersTablePanel.add(customersInfoTablePanel);
@@ -1671,6 +1677,32 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_productsInfoTableHierarchyChanged
+
+    private void customersInfoTableHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_customersInfoTableHierarchyChanged
+        // TODO add your handling code here:
+                        //Customer Info
+        if ((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && customersInfoTable.isShowing()) {
+            try {
+                List<CustomerController> customers = CustomerController.viewCustomers();
+                DefaultTableModel dtm = (DefaultTableModel) customersInfoTable.getModel();
+                dtm.setRowCount(0);
+                if (customers != null) {
+                    for (CustomerController customer : customers) {
+                        Object[] data = {
+                            customer.getId(),
+                            customer.getName(),
+                            customer.getMobile(),
+                            customer.getAddress(),
+                            customer.getPoints(),
+                        };
+                        dtm.addRow(data);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_customersInfoTableHierarchyChanged
 
 
 // 

@@ -1984,6 +1984,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="customersInfoTableHierarchyChanged"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

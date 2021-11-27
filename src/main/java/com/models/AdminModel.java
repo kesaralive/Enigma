@@ -7,8 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +77,6 @@ public class AdminModel {
             cc.setAddress(res.getString("address"));
             cc.setMobile(res.getString("mobile"));
             cc.setDate(res.getString("joined_date"));
-
             list.add(cc);
         }
         return list;
