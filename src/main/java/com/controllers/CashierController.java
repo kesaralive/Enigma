@@ -15,6 +15,7 @@ public class CashierController {
     private String mobile;
     private String address;
     private String password;
+    private String date;
 
 
     public CashierController(){
@@ -84,5 +85,13 @@ public class CashierController {
 
     public void setPassword(String password){
         this.password = password;
+    }
+
+    public void setDate(String joined_date) {
+        this.date = joined_date;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

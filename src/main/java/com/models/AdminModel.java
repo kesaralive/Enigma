@@ -6,6 +6,9 @@ import com.libraries.Database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,12 +37,14 @@ public class AdminModel {
     //create cashier
     public static Boolean createCashier(String[] cashier) throws SQLException {
         db = new Database();
-        db.query("INSERT INTO cashier (username, name, mobile, address, password) VALUES(?,?,?,?,?)");
+        db.query("INSERT INTO cashier (username, name, mobile, address, password, joined_date) VALUES(?,?,?,?,?,?)");
+        LocalDate lt = LocalDate.now();
         db.bindString(1,cashier[0]);
         db.bindString(2,cashier[1]);
         db.bindString(3,cashier[2]);
         db.bindString(4,cashier[3]);
         db.bindString(5,cashier[4]);
+        db.bindDate(6, lt);
         if(db.executeUpdate()>0){
             return  true;
         }else {
@@ -73,6 +78,8 @@ public class AdminModel {
             cc.setName(res.getString("name"));
             cc.setAddress(res.getString("address"));
             cc.setMobile(res.getString("mobile"));
+            cc.setDate(res.getString("joined_date"));
+
             list.add(cc);
         }
         return list;

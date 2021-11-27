@@ -553,13 +553,13 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="47" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cashNamePanel1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="usernamePanel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="passwordPanel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="addressPanel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cashNamePanel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="51" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cashNamePanel1" max="32767" attributes="0"/>
+                                  <Component id="usernamePanel" max="32767" attributes="0"/>
+                                  <Component id="addressPanel" max="32767" attributes="0"/>
+                                  <Component id="cashNamePanel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="passwordPanel" alignment="0" pref="349" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
@@ -577,8 +577,8 @@
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Component id="addressPanel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="passwordPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="41" max="32767" attributes="0"/>
+                              <Component id="passwordPanel" min="-2" pref="56" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -618,6 +618,11 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="cashName">
+                          <Properties>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[329, 25]"/>
+                            </Property>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -630,7 +635,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="addressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cashAddress" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
+                                      <Component id="cashUsername" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -642,8 +647,8 @@
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="addressLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cashAddress" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                  <Component id="cashUsername" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -654,7 +659,12 @@
                             <Property name="text" type="java.lang.String" value="Username"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="cashAddress">
+                        <Component class="javax.swing.JTextField" name="cashUsername">
+                          <Properties>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[329, 25]"/>
+                            </Property>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -667,7 +677,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="usernameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cashUsername" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
+                                      <Component id="cashAddress" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -679,7 +689,7 @@
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="usernameLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cashUsername" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cashAddress" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -691,11 +701,21 @@
                             <Property name="text" type="java.lang.String" value="Address"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="cashUsername">
+                        <Component class="javax.swing.JTextField" name="cashAddress">
+                          <Properties>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[329, 25]"/>
+                            </Property>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="passwordPanel">
+                      <Properties>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[329, 51]"/>
+                        </Property>
+                      </Properties>
 
                       <Layout>
                         <DimensionLayout dim="0">
@@ -703,10 +723,10 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="passwordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cashPassword" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
+                                      <Component id="cashPassword" min="-2" pref="329" max="-2" attributes="0"/>
+                                      <Component id="passwordLabel" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -717,7 +737,7 @@
                                   <Component id="passwordLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="cashPassword" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -728,7 +748,12 @@
                             <Property name="text" type="java.lang.String" value="Password"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="cashPassword">
+                        <Component class="javax.swing.JPasswordField" name="cashPassword">
+                          <Properties>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[329, 25]"/>
+                            </Property>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -766,6 +791,11 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="cashMobile">
+                          <Properties>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[329, 25]"/>
+                            </Property>
+                          </Properties>
                           <Events>
                             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cashMobileKeyTyped"/>
                           </Events>
@@ -805,6 +835,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Add Cashier"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCashierBtnActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -833,10 +866,10 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="437" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="371" max="-2" attributes="0"/>
                           <Component id="viewCashiersTitle" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="361" max="-2" attributes="0"/>
+                          <EmptySpace pref="427" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -886,18 +919,24 @@
                     <Component class="javax.swing.JTable" name="cashiersInfoTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="4">
+                          <Table columnCount="7" rowCount="0">
                             <Column editable="false" title="Cashier_ID" type="java.lang.String"/>
+                            <Column editable="false" title="Username" type="java.lang.String"/>
                             <Column editable="false" title="Name" type="java.lang.String"/>
                             <Column editable="false" title="Mobile No." type="java.lang.String"/>
                             <Column editable="false" title="Address" type="java.lang.String"/>
                             <Column editable="false" title="Date Started" type="java.lang.Integer"/>
-                            <Column editable="true" title="Action" type="java.lang.Object"/>
+                            <Column editable="false" title="Action" type="java.lang.String"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
                             <Column maxWidth="100" minWidth="100" prefWidth="100" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>
@@ -913,19 +952,21 @@
                               <Renderer/>
                             </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title value="Address"/>
+                              <Title/>
                               <Editor/>
                               <Renderer/>
                             </Column>
                             <Column maxWidth="100" minWidth="100" prefWidth="100" resizable="true">
-                              <Title value="Date Started"/>
+                              <Title/>
                               <Editor/>
                               <Renderer/>
                             </Column>
                             <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
                               <Title/>
-                              <Editor/>
-                              <Renderer/>
+                              <Editor editor="org.netbeans.modules.form.RADConnectionPropertyEditor"/>
+                              <Renderer editor="org.netbeans.modules.form.ComponentChooserEditor">
+                                <ComponentRef name="null"/>
+                              </Renderer>
                             </Column>
                           </TableColumnModel>
                         </Property>
@@ -938,6 +979,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="cashiersInfoTableHierarchyChanged"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1232,7 +1276,7 @@
                     <Component class="javax.swing.JTable" name="cashiersInfoTable1">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="4" rowCount="4">
+                          <Table columnCount="4" rowCount="0">
                             <Column editable="false" title="Product_ID" type="java.lang.Integer"/>
                             <Column editable="false" title="Name" type="java.lang.String"/>
                             <Column editable="false" title="Price" type="java.lang.Integer"/>
@@ -1890,13 +1934,42 @@
                     <Component class="javax.swing.JTable" name="customersInfoTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="5" rowCount="4">
+                          <Table columnCount="5" rowCount="0">
                             <Column editable="false" title="Customer_ID" type="java.lang.String"/>
                             <Column editable="false" title="Name" type="java.lang.String"/>
                             <Column editable="false" title="Mobile No." type="java.lang.String"/>
                             <Column editable="false" title="Address" type="java.lang.String"/>
                             <Column editable="false" title="Points" type="java.lang.Integer"/>
                           </Table>
+                        </Property>
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                          <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                          </TableColumnModel>
                         </Property>
                         <Property name="intercellSpacing" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[2, 2]"/>
@@ -2015,7 +2088,7 @@
                         <Component class="javax.swing.JTable" name="orderDetailsTable">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="7" rowCount="4">
+                              <Table columnCount="7" rowCount="0">
                                 <Column editable="false" title="Order_ID" type="java.lang.String"/>
                                 <Column editable="false" title="Customer_Mobile" type="java.lang.String"/>
                                 <Column editable="false" title="Date" type="java.lang.String"/>
@@ -2024,6 +2097,45 @@
                                 <Column editable="false" title="Points" type="java.lang.Integer"/>
                                 <Column editable="false" title="Total" type="java.lang.Float"/>
                               </Table>
+                            </Property>
+                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                              <TableColumnModel selectionModel="0">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                              </TableColumnModel>
                             </Property>
                             <Property name="intercellSpacing" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[2, 2]"/>

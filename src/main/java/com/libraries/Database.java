@@ -6,6 +6,9 @@
 package com.libraries;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import static com.config.Config.*;
 
 /**
@@ -46,6 +49,11 @@ public class Database {
     //to bind String values to the parameterized SQL query
     public void bindString(int id, String value) throws SQLException {
         statement.setString(id,value);
+    }
+
+    //to bind Date values to the parameterized SQL query
+    public void bindDate(int id, LocalDate value) throws SQLException {
+        statement.setDate(id,java.sql.Date.valueOf(value));
     }
 
     //to bind Integer values to the parameterized SQL query
