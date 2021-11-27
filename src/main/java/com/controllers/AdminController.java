@@ -29,13 +29,10 @@ public class AdminController {
         return ad_id;
     }
     
-    public String[] geInfo(Integer ad_id) throws SQLException {
+    public AdminController geInfo(Integer ad_id) throws SQLException {
         AdminModel am = new AdminModel();
-        if(am.getInfo(ad_id)) {
-            String[] info = {username, mobile, password};
-            return info;
-        }
-        return ;
+        AdminController ac = am.getInfo(ad_id);
+        return ac;
     }
 
     //Getters
@@ -63,6 +60,5 @@ public class AdminController {
     public void setPassword(String password){
         this.password = password;
     }
-
     
 }

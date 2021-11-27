@@ -1,5 +1,6 @@
 package com.models;
 
+import com.controllers.AdminController;
 import com.controllers.CashierController;
 import com.libraries.Database;
 
@@ -7,8 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,5 +82,28 @@ public class AdminModel {
             list.add(cc);
         }
         return list;
+    }
+
+    public Integer getAdminID(String username, String password) throws  SQLException{
+        db = new Database();
+        db.query("SELECT * from admin where username = ? and password = ?");
+        db.bindString(1,username);
+        db.bindString(2,password);
+        res = db.executeQuery();
+        Integer ad_id = res.getInt("id");
+        return ad_id;
+    }
+
+    public AdminController getInfo(Integer ad_id) throws SQLException {
+        db = new Database();
+        db.query("SELECT * from admin where id = ?");
+        db.bindInt(1,ad_id);
+        res = db.executeQuery();
+        AdminController ac = new AdminController();
+        if(res.next()){
+            ac.setUsername(res.getString("username"));
+            ac.setMobile(res.getString("phone"));
+        }
+        return ac;
     }
 }
