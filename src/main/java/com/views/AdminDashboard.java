@@ -31,7 +31,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     /**
      * Creates new form AdminDashboard
      */
-    public AdminDashboard() {
+    public AdminDashboard(Integer ad_id) {
         initComponents();
         setSize(900, 520);
         setResizable(false);
@@ -567,7 +567,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addComponent(usernamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cashNamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(passwordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
+                    .addComponent(passwordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE))
                 .addGap(40, 40, 40))
         );
         cashierDetailsFormPanelLayout.setVerticalGroup(
@@ -695,8 +695,6 @@ public class AdminDashboard extends javax.swing.JFrame {
             cashiersInfoTable.getColumnModel().getColumn(6).setMinWidth(150);
             cashiersInfoTable.getColumnModel().getColumn(6).setPreferredWidth(150);
             cashiersInfoTable.getColumnModel().getColumn(6).setMaxWidth(150);
-            cashiersInfoTable.getColumnModel().getColumn(6).setCellEditor(null);
-            cashiersInfoTable.getColumnModel().getColumn(6).setCellRenderer(null);
         }
 
         cashiersTablePanel.add(cashiersInfoTablePanel);
@@ -929,10 +927,13 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         left.setPreferredSize(new java.awt.Dimension(350, 500));
 
+        adminMobile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         adminMobile.setText("+94 76 123 7895");
 
+        adminName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         adminName.setText("John Doe");
 
+        adminAddress.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         adminAddress.setText("21, Jump Street.");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -980,7 +981,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         right.setPreferredSize(new java.awt.Dimension(550, 500));
 
-        rightTopPanel.setPreferredSize(new java.awt.Dimension(550, 200));
+        rightTopPanel.setPreferredSize(new java.awt.Dimension(550, 220));
 
         myNamePanel.setPreferredSize(new java.awt.Dimension(450, 52));
 
@@ -1012,7 +1013,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         rightTopPanel.add(myNamePanel);
 
-        myAddressPanel.setPreferredSize(new java.awt.Dimension(450, 40));
+        myAddressPanel.setPreferredSize(new java.awt.Dimension(450, 50));
 
         myAddressLabel.setText("Address");
 
@@ -1147,7 +1148,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         rightBottomPanel.add(currentPasswordPanel);
 
-        newPasswordPanel.setPreferredSize(new java.awt.Dimension(450, 40));
+        newPasswordPanel.setPreferredSize(new java.awt.Dimension(450, 50));
 
         newPasswordLabel.setText("New Password");
 
@@ -1657,7 +1658,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminDashboard().setVisible(true);
+//                new AdminDashboard(ad_id).setVisible(true);
             }
         });
     }

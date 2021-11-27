@@ -111,9 +111,11 @@ public class AdminLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         AdminController ac = new AdminController();
         String password = new String(passwordAdmin.getPassword());
+        
         if(ac.adminLogin(usernameAdmin.getText(),password)){
+            Integer ad_id = ac.getAdminID(usernameAdmin.getText(),password);
             this.setVisible(false);
-            AdminDashboard ad = new AdminDashboard();
+            AdminDashboard ad = new AdminDashboard(ad_id);
             ad.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null,"Invalid Login Credentials.");
