@@ -59,6 +59,8 @@ public class CashierLogin extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
         jLabel3.setText("Cashier Login");
 
+        cashPassword.setPreferredSize(new java.awt.Dimension(300, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
