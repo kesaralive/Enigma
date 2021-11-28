@@ -1,5 +1,6 @@
 package com.models;
 
+import com.controllers.CashierController;
 import com.libraries.Database;
 import com.libraries.Session;
 
@@ -44,5 +45,25 @@ public class CashierModel {
 
         System.out.println(Session.getID());
         return (flag==1);
+    }
+    
+    public static CashierController getAccountInfo() throws SQLException {
+        db = new Database();
+        String id = String.valueOf(Session.getID());
+        
+        db.query("SELECT * from cashier where idcashier = ?");
+        db.bindString(1,id);
+        res = db.executeQuery();
+        
+        CashierController cc = new CashierController();
+
+        if(res.next()){
+            cc.setName(res.getString("name"));
+            cc.setMobile(res.getString("mobile"));
+            cc.setPassword(res.getString("password"));
+            cc.setAddress(res.getString("address"));
+        }
+        
+        return cc;
     }
 }
