@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.models.AdminModel;
+import com.models.CashierModel;
 
 import java.sql.SQLException;
 import java.util.List;

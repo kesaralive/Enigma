@@ -16,8 +16,8 @@ public class Session {
     private static Database db;
     private static ResultSet res;
     private static Session session;
-    private  static int id;
-    private  static String type;
+    private static int id;
+    private static String type;
     private Session(int id,String type)  {
 
     this.id = id;
