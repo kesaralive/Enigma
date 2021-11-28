@@ -26,13 +26,12 @@ public class CashierController {
     public static void main(String[] args) throws SQLException {
     }
 
-    public Integer cashierLogin(String username, String password) throws SQLException{
+    public boolean cashierLogin(String username, String password) throws SQLException{
         CashierModel cm = new CashierModel();
-        if(cm.login(username, password)>0){
-
-            return 1;
+        if(cm.login(username, password)){
+            return true;
         }else{
-            return 0;
+            return false;
         }
     }
 

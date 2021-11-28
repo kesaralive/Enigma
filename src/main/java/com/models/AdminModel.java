@@ -33,7 +33,7 @@ public class AdminModel {
         int flag=0;
         while(temp.next()){
             flag=1;
-                Session.getSession(res.getInt("id")); 
+            Session.getSession(res.getInt("id"),"ADMIN"); 
         }
 
         System.out.println(Session.getID());
