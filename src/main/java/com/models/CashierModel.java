@@ -10,6 +10,14 @@ public class CashierModel {
     private static Database db;
     private static ResultSet res;
     private static PreparedStatement stmt;
+
+    public static void main(String[] args) throws SQLException {
+        if(login("hello","oqwer")>0){
+            System.out.println("IN");
+        }else{
+            System.out.println("OUT");
+        }
+    }
     //create customer
     public static Boolean createCustomer(String[] customer) throws SQLException {
         db = new Database();
@@ -22,5 +30,17 @@ public class CashierModel {
         }else {
             return  false;
         }
+    }
+
+    public static Integer login(String username, String password) throws SQLException {
+        db = new Database();
+        db.query("SELECT * from cashier where username = ? and password = ?");
+        db.bindString(1,username);
+        db.bindString(2,password);
+        res = db.executeQuery();
+        if(res.next()){
+            return res.getInt("idcashier");
+        }
+        return 0;
     }
 }

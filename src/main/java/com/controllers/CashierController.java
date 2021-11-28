@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.models.AdminModel;
+import com.models.CashierModel;
 
 import java.sql.Array;
 import java.sql.ResultSet;
@@ -23,6 +24,16 @@ public class CashierController {
     }
 
     public static void main(String[] args) throws SQLException {
+    }
+
+    public Integer cashierLogin(String username, String password) throws SQLException{
+        CashierModel cm = new CashierModel();
+        if(cm.login(username, password)>0){
+
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     public Boolean createCashier() throws SQLException {
