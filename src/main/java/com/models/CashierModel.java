@@ -1,6 +1,7 @@
 package com.models;
 
 import com.libraries.Database;
+import com.libraries.Session;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,11 +13,7 @@ public class CashierModel {
     private static PreparedStatement stmt;
 
     public static void main(String[] args) throws SQLException {
-        if(login("hello","oqwer")>0){
-            System.out.println("IN");
-        }else{
-            System.out.println("OUT");
-        }
+  
     }
     //create customer
     public static Boolean createCustomer(String[] customer) throws SQLException {
@@ -32,15 +29,20 @@ public class CashierModel {
         }
     }
 
-    public static Integer login(String username, String password) throws SQLException {
+    public static boolean login(String username, String password) throws SQLException {
         db = new Database();
         db.query("SELECT * from cashier where username = ? and password = ?");
         db.bindString(1,username);
         db.bindString(2,password);
         res = db.executeQuery();
-        if(res.next()){
-            return res.getInt("idcashier");
+        ResultSet temp=res;
+        int flag=0;
+        while(temp.next()){
+            flag=1;
+            Session.getSession(res.getInt("idcashier"),"CASHIER"); 
         }
-        return 0;
+
+        System.out.println(Session.getID());
+        return (flag==1);
     }
 }

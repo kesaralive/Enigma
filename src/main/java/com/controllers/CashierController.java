@@ -14,6 +14,21 @@ public class CashierController {
     private String password;
     private String date;
 
+    public CashierController(){
+
+    }
+
+    public static void main(String[] args) throws SQLException {
+    }
+
+    public boolean cashierLogin(String username, String password) throws SQLException{
+        CashierModel cm = new CashierModel();
+        if(cm.login(username, password)){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public Boolean createCashier() throws SQLException {
         String[] cashier = {this.username, this.name, this.mobile, this.address, this.password};
         AdminModel am = new AdminModel();
