@@ -2,6 +2,7 @@ package com.models;
 
 import com.controllers.CashierController;
 import com.libraries.Database;
+import com.libraries.Session;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +29,15 @@ public class AdminModel {
         db.bindString(1,username);
         db.bindString(2,password);
         res = db.executeQuery();
-        return res.next();
+        ResultSet temp=res;
+        int flag=0;
+        while(temp.next()){
+            flag=1;
+                Session.getSession(res.getInt("id")); 
+        }
+
+        System.out.println(Session.getID());
+        return (flag==1);
     }
 
 
