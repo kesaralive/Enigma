@@ -11,7 +11,6 @@ public class ProductController {
     private String name;
     private String price;
 
-
     //CRUD Methods
     public Boolean createProduct() throws SQLException {
         String[] product = {this.name, this.price};
@@ -29,11 +28,9 @@ public class ProductController {
     public String getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public String getPrice() {
         return price;
     }
@@ -42,16 +39,10 @@ public class ProductController {
     public void setId(String id) {
         this.id = id;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public void setPrice(String price) {
         this.price = price;
-    }
-
-    public void setName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
