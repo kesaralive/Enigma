@@ -5,6 +5,7 @@ import java.util.List;
 
 public class SalesController {
 
+
     public static void main(String[] args) throws SQLException {
     }
 
