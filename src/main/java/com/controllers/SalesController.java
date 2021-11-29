@@ -30,7 +30,7 @@ public class SalesController {
         return products;
     }
 
-    List<SalesController> viewSales() throws SQLException {
+    public static List<SalesController> viewSales() throws SQLException {
         SalesModel sm = new SalesModel();
         List<SalesController> sales = sm.getSales();
         return sales;
@@ -55,6 +55,10 @@ public class SalesController {
 
     public String getPoints(){
         return points;
+    }
+    
+    public Date getDate(){
+        return date;
     }
 
     //Setters
