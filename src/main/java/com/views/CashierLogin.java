@@ -33,29 +33,22 @@ public class CashierLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cashUsername = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         cashLoginBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        cashUsername = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         cashPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(900, 500));
-        setMinimumSize(new java.awt.Dimension(900, 500));
-        setPreferredSize(new java.awt.Dimension(900, 500));
-
-        cashUsername.setMaximumSize(new java.awt.Dimension(200, 30));
-        cashUsername.setMinimumSize(new java.awt.Dimension(200, 30));
-        cashUsername.setPreferredSize(new java.awt.Dimension(200, 30));
-
-        jLabel1.setText("Username");
-
-        jLabel2.setText("Password");
+        setMaximumSize(new java.awt.Dimension(900, 520));
+        setMinimumSize(new java.awt.Dimension(900, 520));
+        setPreferredSize(new java.awt.Dimension(900, 520));
 
         cashLoginBtn.setText("Login");
         cashLoginBtn.setPreferredSize(new java.awt.Dimension(300, 30));
-        cashLoginBtn.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         cashLoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cashLoginBtnActionPerformed(evt);
@@ -66,48 +59,62 @@ public class CashierLogin extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Cashier Login");
 
-        cashPassword.setMaximumSize(new java.awt.Dimension(200, 30));
-        cashPassword.setPreferredSize(new java.awt.Dimension(200, 30));
-        cashPassword.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setMaximumSize(new java.awt.Dimension(100, 50));
+        jPanel1.setMinimumSize(new java.awt.Dimension(100, 50));
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 50));
+        jPanel1.setLayout(new java.awt.BorderLayout(0, 8));
+
+        jLabel1.setText("Username");
+        jPanel1.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+
+        cashUsername.setMaximumSize(new java.awt.Dimension(300, 30));
+        cashUsername.setPreferredSize(new java.awt.Dimension(300, 30));
+        cashUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cashPasswordActionPerformed(evt);
+                cashUsernameActionPerformed(evt);
             }
         });
+        jPanel1.add(cashUsername, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setMaximumSize(new java.awt.Dimension(100, 50));
+        jPanel2.setMinimumSize(new java.awt.Dimension(100, 50));
+        jPanel2.setPreferredSize(new java.awt.Dimension(100, 50));
+        jPanel2.setLayout(new java.awt.BorderLayout(0, 8));
+
+        jLabel2.setText("Password");
+        jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jPanel2.add(jLabel2, java.awt.BorderLayout.PAGE_START);
+        jPanel2.add(cashPassword, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(370, 370, 370))
             .addGroup(layout.createSequentialGroup()
-                .addGap(328, 328, 328)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cashUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cashPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cashLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(332, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(326, 326, 326)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cashLoginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(384, 384, 384)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(328, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(75, 75, 75)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cashUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cashPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(54, 54, 54)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(cashLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,9 +140,9 @@ public class CashierLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cashLoginBtnActionPerformed
 
-    private void cashPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashPasswordActionPerformed
+    private void cashUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cashPasswordActionPerformed
+    }//GEN-LAST:event_cashUsernameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,5 +186,7 @@ public class CashierLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,8 +7,12 @@ package com.views;
 
 import com.controllers.CashierController;
 import com.controllers.CustomerController;
+import com.controllers.SalesController;
 import java.awt.event.HierarchyEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +21,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 
 /**
@@ -28,7 +33,17 @@ public class CashierDashboard extends javax.swing.JFrame {
     /**
      * Creates new form CashierDashboard
      */
-    public CashierDashboard() {
+   
+    Integer item = 0;
+    Dictionary itemList = new Hashtable();
+    List<Integer> priceList = new ArrayList();
+    float subTotal;
+    float calcGrossTotal;
+    int balancePoints;
+    int pointsNeeded = 0;
+    int currPoints;
+    
+    public CashierDashboard() throws SQLException {
         initComponents();
         setSize(900,520);
         setResizable(false);
@@ -36,7 +51,21 @@ public class CashierDashboard extends javax.swing.JFrame {
         
         super.setLocationRelativeTo(null);
         
-        String[] a ={"Item1", "Item2", "Item3"};
+        SalesController sc = new SalesController();
+        String[][] products = sc.getProducts();
+        System.out.println(products[0][1]);
+        
+        int i = 0;
+        
+        String[] a = new String[products.length];
+        
+        for(String[] product : products){
+         a[i] = product[0];
+         itemList.put(product[0], product[1]);
+         i++;
+        }
+//        String[] a ={"asd","asd"};
+        System.out.println(a);
         JComboBox c = new JComboBox(a);
         
         itemsTable.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(c));
@@ -65,22 +94,18 @@ public class CashierDashboard extends javax.swing.JFrame {
         customerDetailsPanel = new javax.swing.JPanel();
         cutomerMobilePanel = new javax.swing.JPanel();
         cusMobilleLabel = new javax.swing.JLabel();
-        cusMobileNo = new javax.swing.JTextField();
+        customerMobileNo = new javax.swing.JTextField();
+        verifyCustomerBtn = new javax.swing.JButton();
         totalPointsPanel = new javax.swing.JPanel();
         totalPointsLabel = new javax.swing.JLabel();
         totalPoints = new javax.swing.JLabel();
         addPointsPanel = new javax.swing.JPanel();
         pointsToAdd = new javax.swing.JTextField();
         addPointsBtn = new javax.swing.JButton();
-        discountCheckPanel = new javax.swing.JPanel();
-        addDiscountCheck = new javax.swing.JCheckBox();
         totalSummaryPanel = new javax.swing.JPanel();
         subtotalPanel = new javax.swing.JPanel();
         subtotal = new javax.swing.JLabel();
         subtotalLabel = new javax.swing.JLabel();
-        discountPanel = new javax.swing.JPanel();
-        discount = new javax.swing.JLabel();
-        discountLabel = new javax.swing.JLabel();
         pointsPanel = new javax.swing.JPanel();
         points = new javax.swing.JLabel();
         pointsLabel = new javax.swing.JLabel();
@@ -232,15 +257,28 @@ public class CashierDashboard extends javax.swing.JFrame {
                 "Item", "Quantity", "Amount"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Float.class
+            };
             boolean[] canEdit = new boolean [] {
                 true, true, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         itemsTable.setRowHeight(25);
+        itemsTable.getTableHeader().setReorderingAllowed(false);
+        itemsTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                itemsTableKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(itemsTable);
 
         itemsPanel.add(jScrollPane1);
@@ -275,11 +313,28 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         orderSummaryPanel.setPreferredSize(new java.awt.Dimension(350, 520));
 
-        customerDetailsPanel.setPreferredSize(new java.awt.Dimension(350, 130));
+        customerDetailsPanel.setPreferredSize(new java.awt.Dimension(350, 200));
 
-        cutomerMobilePanel.setPreferredSize(new java.awt.Dimension(321, 40));
+        cutomerMobilePanel.setPreferredSize(new java.awt.Dimension(321, 65));
 
         cusMobilleLabel.setText("Customer Mobile No:");
+
+        customerMobileNo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        customerMobileNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                customerMobileNoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                customerMobileNoKeyTyped(evt);
+            }
+        });
+
+        verifyCustomerBtn.setText("Verify");
+        verifyCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verifyCustomerBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cutomerMobilePanelLayout = new javax.swing.GroupLayout(cutomerMobilePanel);
         cutomerMobilePanel.setLayout(cutomerMobilePanelLayout);
@@ -287,20 +342,26 @@ public class CashierDashboard extends javax.swing.JFrame {
             cutomerMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cutomerMobilePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cusMobilleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(cusMobileNo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(cutomerMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cutomerMobilePanelLayout.createSequentialGroup()
+                        .addComponent(cusMobilleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addComponent(customerMobileNo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cutomerMobilePanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(verifyCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         cutomerMobilePanelLayout.setVerticalGroup(
             cutomerMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cutomerMobilePanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addGroup(cutomerMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cutomerMobilePanelLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(cusMobilleLabel))
-                    .addComponent(cusMobileNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(customerMobileNo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(verifyCustomerBtn)
                 .addContainerGap())
         );
 
@@ -310,6 +371,9 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         totalPointsLabel.setText("Total Points:");
 
+        totalPoints.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        totalPoints.setPreferredSize(new java.awt.Dimension(0, 20));
+
         javax.swing.GroupLayout totalPointsPanelLayout = new javax.swing.GroupLayout(totalPointsPanel);
         totalPointsPanel.setLayout(totalPointsPanelLayout);
         totalPointsPanelLayout.setHorizontalGroup(
@@ -317,7 +381,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(totalPointsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(totalPointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(totalPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -326,16 +390,27 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(totalPointsPanelLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(totalPointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalPointsLabel)
-                    .addComponent(totalPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(totalPointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         customerDetailsPanel.add(totalPointsPanel);
 
         addPointsPanel.setPreferredSize(new java.awt.Dimension(321, 40));
 
+        pointsToAdd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pointsToAddKeyTyped(evt);
+            }
+        });
+
         addPointsBtn.setText("Add Points");
+        addPointsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPointsBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addPointsPanelLayout = new javax.swing.GroupLayout(addPointsPanel);
         addPointsPanel.setLayout(addPointsPanelLayout);
@@ -344,56 +419,33 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(addPointsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pointsToAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(addPointsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         addPointsPanelLayout.setVerticalGroup(
             addPointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addPointsPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(addPointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pointsToAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addPointsBtn))
-                .addContainerGap())
+                .addComponent(addPointsBtn)
+                .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addPointsPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pointsToAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
         customerDetailsPanel.add(addPointsPanel);
 
         orderSummaryPanel.add(customerDetailsPanel);
 
-        discountCheckPanel.setPreferredSize(new java.awt.Dimension(350, 30));
-
-        addDiscountCheck.setText("Add Discount");
-        addDiscountCheck.setIconTextGap(10);
-        addDiscountCheck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addDiscountCheckActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout discountCheckPanelLayout = new javax.swing.GroupLayout(discountCheckPanel);
-        discountCheckPanel.setLayout(discountCheckPanelLayout);
-        discountCheckPanelLayout.setHorizontalGroup(
-            discountCheckPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, discountCheckPanelLayout.createSequentialGroup()
-                .addContainerGap(186, Short.MAX_VALUE)
-                .addComponent(addDiscountCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
-        );
-        discountCheckPanelLayout.setVerticalGroup(
-            discountCheckPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discountCheckPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(addDiscountCheck)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        orderSummaryPanel.add(discountCheckPanel);
-
-        totalSummaryPanel.setPreferredSize(new java.awt.Dimension(350, 150));
+        totalSummaryPanel.setPreferredSize(new java.awt.Dimension(350, 125));
+        totalSummaryPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 2, 0));
 
         subtotalPanel.setPreferredSize(new java.awt.Dimension(321, 30));
+
+        subtotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        subtotal.setText("0.0");
+        subtotal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         subtotalLabel.setText("Subtotal");
 
@@ -404,7 +456,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(subtotalPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(subtotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -420,34 +472,10 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         totalSummaryPanel.add(subtotalPanel);
 
-        discountPanel.setPreferredSize(new java.awt.Dimension(321, 30));
-
-        discountLabel.setText("Discount");
-
-        javax.swing.GroupLayout discountPanelLayout = new javax.swing.GroupLayout(discountPanel);
-        discountPanel.setLayout(discountPanelLayout);
-        discountPanelLayout.setHorizontalGroup(
-            discountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discountPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(discountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(discount, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        discountPanelLayout.setVerticalGroup(
-            discountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discountPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(discountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(discountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(discount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(3, 3, 3))
-        );
-
-        totalSummaryPanel.add(discountPanel);
-
         pointsPanel.setPreferredSize(new java.awt.Dimension(321, 30));
+
+        points.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        points.setText("0");
 
         pointsLabel.setText("Points");
 
@@ -458,7 +486,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(pointsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(points, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -476,6 +504,9 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         grossTotalPanel.setPreferredSize(new java.awt.Dimension(321, 30));
 
+        grossTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        grossTotal.setText("0.0");
+
         grossTotalLabel.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         grossTotalLabel.setText("Gross total");
 
@@ -486,7 +517,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(grossTotalPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(grossTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(grossTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -507,6 +538,11 @@ public class CashierDashboard extends javax.swing.JFrame {
         checkoutBtnPanel.setPreferredSize(new java.awt.Dimension(350, 50));
 
         checkoutBtn.setText("Checkout");
+        checkoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkoutBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout checkoutBtnPanelLayout = new javax.swing.GroupLayout(checkoutBtnPanel);
         checkoutBtnPanel.setLayout(checkoutBtnPanelLayout);
@@ -549,10 +585,10 @@ public class CashierDashboard extends javax.swing.JFrame {
         orderDetailsTitlePanel.setLayout(orderDetailsTitlePanelLayout);
         orderDetailsTitlePanelLayout.setHorizontalGroup(
             orderDetailsTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderDetailsTitlePanelLayout.createSequentialGroup()
-                .addContainerGap(450, Short.MAX_VALUE)
+            .addGroup(orderDetailsTitlePanelLayout.createSequentialGroup()
+                .addGap(396, 396, 396)
                 .addComponent(orderSecTitle)
-                .addGap(361, 361, 361))
+                .addContainerGap(415, Short.MAX_VALUE))
         );
         orderDetailsTitlePanelLayout.setVerticalGroup(
             orderDetailsTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,20 +606,17 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         orderDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Order_ID", "Customer_Mobile", "Date", "Items", "Discount", "Points", "Total"
+                "Order_ID", "Customer_Mobile", "Date", "Points", "Total", "Items"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Float.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false, false
+                false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -595,20 +628,25 @@ public class CashierDashboard extends javax.swing.JFrame {
             }
         });
         orderDetailsTable.setIntercellSpacing(new java.awt.Dimension(2, 2));
+        orderDetailsTable.setMaximumSize(new java.awt.Dimension(900, 500));
+        orderDetailsTable.setPreferredSize(new java.awt.Dimension(900, 500));
         orderDetailsTable.setRowHeight(20);
         orderDetailsTable.setShowGrid(true);
+        orderDetailsTable.getTableHeader().setReorderingAllowed(false);
+        orderDetailsTable.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                orderDetailsTableHierarchyChanged(evt);
+            }
+        });
         orderDetailsTablePanel.setViewportView(orderDetailsTable);
         if (orderDetailsTable.getColumnModel().getColumnCount() > 0) {
             orderDetailsTable.getColumnModel().getColumn(0).setPreferredWidth(100);
             orderDetailsTable.getColumnModel().getColumn(0).setMaxWidth(100);
             orderDetailsTable.getColumnModel().getColumn(2).setPreferredWidth(120);
             orderDetailsTable.getColumnModel().getColumn(2).setMaxWidth(120);
+            orderDetailsTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            orderDetailsTable.getColumnModel().getColumn(3).setMaxWidth(100);
             orderDetailsTable.getColumnModel().getColumn(4).setPreferredWidth(60);
-            orderDetailsTable.getColumnModel().getColumn(4).setHeaderValue("Discount");
-            orderDetailsTable.getColumnModel().getColumn(5).setPreferredWidth(100);
-            orderDetailsTable.getColumnModel().getColumn(5).setMaxWidth(100);
-            orderDetailsTable.getColumnModel().getColumn(6).setPreferredWidth(60);
-            orderDetailsTable.getColumnModel().getColumn(6).setHeaderValue("Total");
         }
 
         salesTablePanel.add(orderDetailsTablePanel);
@@ -765,6 +803,12 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         cusMobileLabel.setText("Mobile No.");
 
+        cusMobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cusMobileKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout cusMobilePanelLayout = new javax.swing.GroupLayout(cusMobilePanel);
         cusMobilePanel.setLayout(cusMobilePanelLayout);
         cusMobilePanelLayout.setHorizontalGroup(
@@ -791,7 +835,7 @@ public class CashierDashboard extends javax.swing.JFrame {
         customerDetailsFormPanelLayout.setHorizontalGroup(
             customerDetailsFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerDetailsFormPanelLayout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(customerDetailsFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cusMobilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -872,6 +916,12 @@ public class CashierDashboard extends javax.swing.JFrame {
         customerDetailsFormPanel1.setPreferredSize(new java.awt.Dimension(440, 280));
 
         enterMobileNoLabel.setText("Enter Customer Mobile No.");
+
+        cusMobileInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cusMobileInputKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout cusSearchInputPanelLayout = new javax.swing.GroupLayout(cusSearchInputPanel);
         cusSearchInputPanel.setLayout(cusSearchInputPanelLayout);
@@ -1058,24 +1108,23 @@ public class CashierDashboard extends javax.swing.JFrame {
             }
         });
 
-        jPanel10.setPreferredSize(new java.awt.Dimension(250, 89));
-
         cashMobile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cashMobile.setPreferredSize(new java.awt.Dimension(250, 0));
 
         cashName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cashName.setPreferredSize(new java.awt.Dimension(250, 0));
 
         cashAddress.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cashAddress.setPreferredSize(new java.awt.Dimension(250, 0));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cashName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(cashAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(cashMobile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cashMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cashAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cashName, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1092,17 +1141,17 @@ public class CashierDashboard extends javax.swing.JFrame {
         left.setLayout(leftLayout);
         leftLayout.setHorizontalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftLayout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
+            .addGroup(leftLayout.createSequentialGroup()
+                .addGap(89, 89, 89)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         leftLayout.setVerticalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftLayout.createSequentialGroup()
-                .addGap(197, 197, 197)
+                .addGap(194, 194, 194)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
 
         settingsPanel.add(left, java.awt.BorderLayout.WEST);
@@ -1124,7 +1173,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(myNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(myNamePanelLayout.createSequentialGroup()
                         .addComponent(myNameLabel)
-                        .addGap(265, 413, Short.MAX_VALUE))
+                        .addGap(265, 411, Short.MAX_VALUE))
                     .addGroup(myNamePanelLayout.createSequentialGroup()
                         .addComponent(myName)
                         .addContainerGap())))
@@ -1160,7 +1209,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(myAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(myAddressPanelLayout.createSequentialGroup()
                         .addComponent(myAddressLabel)
-                        .addGap(299, 401, Short.MAX_VALUE))
+                        .addGap(299, 396, Short.MAX_VALUE))
                     .addGroup(myAddressPanelLayout.createSequentialGroup()
                         .addComponent(myAddress)
                         .addContainerGap())))
@@ -1181,6 +1230,12 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         myMobileLabel.setText("Mobile No.");
 
+        myMobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                myMobileKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout myMobilePanelLayout = new javax.swing.GroupLayout(myMobilePanel);
         myMobilePanel.setLayout(myMobilePanelLayout);
         myMobilePanelLayout.setHorizontalGroup(
@@ -1190,7 +1245,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(myMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(myMobilePanelLayout.createSequentialGroup()
                         .addComponent(myMobileLabel)
-                        .addGap(292, 390, Short.MAX_VALUE))
+                        .addGap(292, 389, Short.MAX_VALUE))
                     .addGroup(myMobilePanelLayout.createSequentialGroup()
                         .addComponent(myMobile)
                         .addContainerGap())))
@@ -1211,21 +1266,11 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         saveChangesBtn.setText("Save Changes");
         saveChangesBtn.setPreferredSize(new java.awt.Dimension(75, 25));
-        saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveChangesBtnActionPerformed(evt);
-            }
-        });
 
         cancelChangesBtn.setText("Cancel");
         cancelChangesBtn.setMaximumSize(new java.awt.Dimension(75, 25));
         cancelChangesBtn.setMinimumSize(new java.awt.Dimension(75, 25));
         cancelChangesBtn.setPreferredSize(new java.awt.Dimension(75, 25));
-        cancelChangesBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelChangesBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout myInfoActionPanelLayout = new javax.swing.GroupLayout(myInfoActionPanel);
         myInfoActionPanel.setLayout(myInfoActionPanelLayout);
@@ -1293,7 +1338,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(newPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(newPasswordPanelLayout.createSequentialGroup()
                         .addComponent(newPasswordLabel)
-                        .addGap(299, 370, Short.MAX_VALUE))
+                        .addGap(299, 362, Short.MAX_VALUE))
                     .addGroup(newPasswordPanelLayout.createSequentialGroup()
                         .addComponent(newPassword)
                         .addContainerGap())))
@@ -1322,7 +1367,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(confPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(confPasswordPanelLayout.createSequentialGroup()
                         .addComponent(confPasswordLabel)
-                        .addGap(292, 354, Short.MAX_VALUE))
+                        .addGap(292, 348, Short.MAX_VALUE))
                     .addGroup(confPasswordPanelLayout.createSequentialGroup()
                         .addComponent(confPassword)
                         .addContainerGap())))
@@ -1343,21 +1388,11 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         saveNewPasswordBtn.setText("Save Changes");
         saveNewPasswordBtn.setPreferredSize(new java.awt.Dimension(75, 25));
-        saveNewPasswordBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveNewPasswordBtnActionPerformed(evt);
-            }
-        });
 
         cancelPasswordChangeBtn.setText("Cancel");
         cancelPasswordChangeBtn.setMaximumSize(new java.awt.Dimension(75, 25));
         cancelPasswordChangeBtn.setMinimumSize(new java.awt.Dimension(75, 25));
         cancelPasswordChangeBtn.setPreferredSize(new java.awt.Dimension(75, 25));
-        cancelPasswordChangeBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelPasswordChangeBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout myPasswordActionPanelLayout = new javax.swing.GroupLayout(myPasswordActionPanel);
         myPasswordActionPanel.setLayout(myPasswordActionPanelLayout);
@@ -1496,14 +1531,27 @@ public class CashierDashboard extends javax.swing.JFrame {
         switchPanels(settingsPanel);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void addDiscountCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDiscountCheckActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addDiscountCheckActionPerformed
-
     private void addItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemBtnActionPerformed
         // TODO add your handling code here:
+
         DefaultTableModel model = (DefaultTableModel)itemsTable.getModel();
+        String itemName = itemsTable.getModel().getValueAt(item,0).toString();
+        Integer itemQuantity = Integer.parseInt(itemsTable.getModel().getValueAt(item, 1).toString());
+        Integer itemPrice = Integer.parseInt(itemList.get(itemName).toString());
+        priceList.add(itemPrice*itemQuantity);
+        itemsTable.getModel().setValueAt(itemPrice*itemQuantity, item, 2);
+        item++;
         model.addRow(new Object[]{});
+        
+        int intSubTotal = priceList.stream().mapToInt(Integer::intValue).sum();
+        
+        // Calculating Subtotal
+        subTotal = (float)intSubTotal;
+        subtotal.setText(String.valueOf(subTotal));
+        
+        // Calculating Gross total
+        calcGrossTotal = subTotal - Integer.parseInt(points.getText());
+        grossTotal.setText(String.valueOf(subTotal));
     }//GEN-LAST:event_addItemBtnActionPerformed
 
     private void myAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myAddressActionPerformed
@@ -1548,7 +1596,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                     }
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_customersInfoTableHierarchyChanged
@@ -1573,97 +1621,175 @@ public class CashierDashboard extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             CashierController ac = new CashierController().getAccountInfo();
-            cashName.setText(ac.getName());
+            cashName.setText(ac.getUsername());
             cashMobile.setText(ac.getMobile());
             cashAddress.setText(ac.getAddress());
-            myName.setText(ac.getName());
+            myName.setText(ac.getUsername());
             myMobile.setText(ac.getMobile());
-            myAddress.setText(ac.getAddress());
+            myAddress.setText(ac.getMobile());
         } catch (SQLException ex) {
             Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_leftHierarchyChanged
 
-    private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
+    private void orderDetailsTableHierarchyChanged(HierarchyEvent evt) {//GEN-FIRST:event_orderDetailsTableHierarchyChanged
         // TODO add your handling code here:
-        try {
-            // TODO add your handling code here:
-            CashierController cc = new CashierController();
-            String newName = myName.getText();
-            String newAddress = myAddress.getText();
-            String newMobile = myMobile.getText();
-            
-            if(cc.updateAccountInfo(newName, newAddress, newMobile)) {
-                JOptionPane.showMessageDialog(null,"Profile info updated successfully");
-                CashierController ucc = new CashierController().getAccountInfo();
-                cashName.setText(ucc.getName());
-                cashAddress.setText(ucc.getAddress());
-                cashMobile.setText(ucc.getMobile());
-                
-                myName.setText(ucc.getName());
-                myAddress.setText(ucc.getAddress());
-                myMobile.setText(ucc.getMobile());
-            } else {
-                JOptionPane.showMessageDialog(null,"Could not update Profile :(");
-                cashName.setText(cc.getUsername());
-                cashAddress.setText(cc.getAddress());
-                cashMobile.setText(cc.getMobile());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_saveChangesBtnActionPerformed
-
-    private void cancelChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelChangesBtnActionPerformed
-        // TODO add your handling code here:
-        try {
-            // TODO add your handling code here:
-            CashierController cc = new CashierController().getAccountInfo();
-            myName.setText(cc.getName());
-            myAddress.setText(cc.getAddress());
-            myMobile.setText(cc.getMobile());
-        } catch (SQLException ex) {
-            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_cancelChangesBtnActionPerformed
-
-    private void saveNewPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewPasswordBtnActionPerformed
-        // TODO add your handling code here:
-        String currentPsd = new String(currPassword.getPassword());
-        String newPsd = new String(newPassword.getPassword());
-        String confPsd = new String(confPassword.getPassword());
-        
-        if(newPsd.equals(confPsd)) {
+         if ((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && orderDetailsTable.isShowing()) {
             try {
-                CashierController cc = new CashierController();
-                if(cc.changePassword(currentPsd, newPsd)) {
-                    JOptionPane.showMessageDialog(null,"Password updated successfully");
-                    currPassword.setText("");
-                    newPassword.setText("");
-                    confPassword.setText("");
-                } else {
-                    JOptionPane.showMessageDialog(null,"Password change failed");
-                    currPassword.setText("");
-                    newPassword.setText("");
-                    confPassword.setText("");
+                List<SalesController> sales = SalesController.viewSales();
+                DefaultTableModel dtm = (DefaultTableModel) orderDetailsTable.getModel();
+                dtm.setRowCount(0);
+                if (sales != null) {
+                    for (SalesController sale : sales) {
+                        Object[] data = {
+                            sale.getId(),
+                            sale.getCusMobile(),
+                            sale.getDate(),
+                            sale.getPoints(),
+                            sale.getGrossTotal()
+                        };
+                        dtm.addRow(data);
+                    }
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-            JOptionPane.showMessageDialog(null,"Passwords do not match.");
-            newPassword.setText("");
-            confPassword.setText("");
         }
-    }//GEN-LAST:event_saveNewPasswordBtnActionPerformed
+    }//GEN-LAST:event_orderDetailsTableHierarchyChanged
 
-    private void cancelPasswordChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelPasswordChangeBtnActionPerformed
+    private void customerMobileNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerMobileNoKeyTyped
         // TODO add your handling code here:
-        currPassword.setText("");
-        newPassword.setText("");
-        confPassword.setText("");
-    }//GEN-LAST:event_cancelPasswordChangeBtnActionPerformed
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_customerMobileNoKeyTyped
+
+    private void customerMobileNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerMobileNoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customerMobileNoKeyReleased
+
+    private void verifyCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verifyCustomerBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            CustomerController cc = new CustomerController();
+            String cusMobileNo = customerMobileNo.getText();
+            if(cc.customerExists(cusMobileNo)) {
+                CustomerController ucc = new CustomerController().getCustomerPoints(cusMobileNo);
+                totalPoints.setText(String.valueOf(ucc.getPoints()));
+            } else {
+                JOptionPane.showMessageDialog(null,"Customer not registered");
+                customerMobileNo.setText("");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_verifyCustomerBtnActionPerformed
+
+    private void addPointsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPointsBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            String cusMobileNo = customerMobileNo.getText();
+            CustomerController cc = new CustomerController().getCustomerPoints(cusMobileNo);
+            pointsNeeded = Integer.parseInt(pointsToAdd.getText());
+            currPoints = cc.getPoints();
+            
+            if(pointsNeeded <= currPoints && pointsNeeded >= 100) {
+                points.setText(pointsToAdd.getText());
+                
+                // Calculating Gross total
+                calcGrossTotal = subTotal - pointsNeeded;
+                grossTotal.setText(String.valueOf(calcGrossTotal));
+
+            } else {
+                JOptionPane.showMessageDialog(null,"Insufficient points");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_addPointsBtnActionPerformed
+
+    private void pointsToAddKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pointsToAddKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_pointsToAddKeyTyped
+
+    private void cusMobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cusMobileKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_cusMobileKeyTyped
+
+    private void cusMobileInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cusMobileInputKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_cusMobileInputKeyTyped
+
+    private void myMobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_myMobileKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_myMobileKeyTyped
+
+    private void itemsTableKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemsTableKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemsTableKeyTyped
+
+    private void checkoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            SalesController sc = new SalesController();
+            String cusMobileNo = customerMobileNo.getText();
+            String pointss = String.valueOf(pointsNeeded);
+            String total = String.valueOf(calcGrossTotal);
+            balancePoints = currPoints - pointsNeeded;
+            
+            CustomerController cc = new CustomerController();
+            
+            if(sc.addSale(cusMobileNo, pointss, total) && cc.deductPoints(balancePoints, cusMobileNo)){
+                balancePoints = currPoints - pointsNeeded;
+                
+                JOptionPane.showMessageDialog(null, "Checkout complete!");
+                customerMobileNo.setText("");
+                points.setText("");
+                pointsToAdd.setText("");
+                totalPoints.setText("");
+                subtotal.setText("0.0");
+                points.setText("0");
+                grossTotal.setText("0.0");
+                
+                subTotal = 0;
+                calcGrossTotal = 0;
+                balancePoints = 0;
+                pointsNeeded = 0;
+                currPoints = 0;
+                item = 0;
+                
+                priceList.clear();
+
+                DefaultTableModel tMOdel = (DefaultTableModel) itemsTable.getModel();
+                tMOdel.setRowCount(0);
+                tMOdel.setRowCount(1);
+      
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Could not place order");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_checkoutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1695,7 +1821,11 @@ public class CashierDashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CashierDashboard().setVisible(true);
+                try {
+                    new CashierDashboard().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -1716,7 +1846,6 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel addCustomerTitle1;
     private javax.swing.JPanel addCustomerTitlePanel;
     private javax.swing.JPanel addCustomerTitlePanel1;
-    private javax.swing.JCheckBox addDiscountCheck;
     private javax.swing.JButton addItemBtn;
     private javax.swing.JButton addPointsBtn;
     private javax.swing.JPanel addPointsPanel;
@@ -1746,7 +1875,6 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JTextField cusMobile;
     private javax.swing.JTextField cusMobileInput;
     private javax.swing.JLabel cusMobileLabel;
-    private javax.swing.JTextField cusMobileNo;
     private javax.swing.JPanel cusMobilePanel;
     private javax.swing.JLabel cusMobilleLabel;
     private javax.swing.JTextField cusName;
@@ -1759,14 +1887,11 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel customerDetailsFormPanel;
     private javax.swing.JPanel customerDetailsFormPanel1;
     private javax.swing.JPanel customerDetailsPanel;
+    private javax.swing.JTextField customerMobileNo;
     private javax.swing.JTable customersInfoTable;
     private javax.swing.JScrollPane customersInfoTablePanel;
     private javax.swing.JPanel customersTablePanel;
     private javax.swing.JPanel cutomerMobilePanel;
-    private javax.swing.JLabel discount;
-    private javax.swing.JPanel discountCheckPanel;
-    private javax.swing.JLabel discountLabel;
-    private javax.swing.JPanel discountPanel;
     private javax.swing.JLabel enterMobileNoLabel;
     private javax.swing.JLabel grossTotal;
     private javax.swing.JLabel grossTotalLabel;
@@ -1839,6 +1964,7 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel totalPointsLabel;
     private javax.swing.JPanel totalPointsPanel;
     private javax.swing.JPanel totalSummaryPanel;
+    private javax.swing.JButton verifyCustomerBtn;
     private javax.swing.JPanel viewCustomersPanel;
     private javax.swing.JLabel viewCustomersTitle;
     private javax.swing.JPanel viewCustomersTitlePanel;

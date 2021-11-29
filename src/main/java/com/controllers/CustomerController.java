@@ -44,4 +44,29 @@ public class CustomerController {
         CustomerController cc = cm.searchCustomer(mobile);
         return cc;
     }
+    
+    public boolean customerExists(String cusMobile) throws Exception {
+        CustomerModel cm = new CustomerModel();
+        if(cm.customerExists(cusMobile)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public static CustomerController getCustomerPoints(String cusMobileNo) throws Exception {
+        CustomerModel cm = new CustomerModel();
+        CustomerController cc = new CustomerController();
+        cc = cm.getCustomerPoints(cusMobileNo);
+        return cc;
+    }
+    
+    public boolean deductPoints(int balancePoints, String cusMobileNo) throws SQLException {
+        CustomerModel cm = new CustomerModel();
+        if(cm.deductPoints(balancePoints, cusMobileNo)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
