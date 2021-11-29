@@ -206,7 +206,7 @@
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="3" rowCount="1">
                             <Column editable="true" title="Item" type="java.lang.Object"/>
-                            <Column editable="true" title="Quantity" type="java.lang.Object"/>
+                            <Column editable="true" title="Quantity" type="java.lang.Integer"/>
                             <Column editable="false" title="Amount" type="java.lang.Object"/>
                           </Table>
                         </Property>
@@ -231,9 +231,12 @@
                         </Property>
                         <Property name="rowHeight" type="int" value="25"/>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                          <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="itemsTableKeyTyped"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -446,6 +449,9 @@
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JTextField" name="pointsToAdd">
+                          <Events>
+                            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="pointsToAddKeyTyped"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="addPointsBtn">
                           <Properties>
@@ -1199,6 +1205,9 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="cusMobile">
+                          <Events>
+                            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cusMobileKeyTyped"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1346,6 +1355,9 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="cusMobileInput">
+                          <Events>
+                            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cusMobileInputKeyTyped"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1831,6 +1843,9 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="myMobile">
+                          <Events>
+                            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="myMobileKeyTyped"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

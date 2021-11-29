@@ -255,15 +255,28 @@ public class CashierDashboard extends javax.swing.JFrame {
                 "Item", "Quantity", "Amount"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 true, true, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         itemsTable.setRowHeight(25);
+        itemsTable.getTableHeader().setReorderingAllowed(false);
+        itemsTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                itemsTableKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(itemsTable);
 
         itemsPanel.add(jScrollPane1);
@@ -381,6 +394,12 @@ public class CashierDashboard extends javax.swing.JFrame {
         customerDetailsPanel.add(totalPointsPanel);
 
         addPointsPanel.setPreferredSize(new java.awt.Dimension(321, 40));
+
+        pointsToAdd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pointsToAddKeyTyped(evt);
+            }
+        });
 
         addPointsBtn.setText("Add Points");
         addPointsBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -822,6 +841,12 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         cusMobileLabel.setText("Mobile No.");
 
+        cusMobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cusMobileKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout cusMobilePanelLayout = new javax.swing.GroupLayout(cusMobilePanel);
         cusMobilePanel.setLayout(cusMobilePanelLayout);
         cusMobilePanelLayout.setHorizontalGroup(
@@ -929,6 +954,12 @@ public class CashierDashboard extends javax.swing.JFrame {
         customerDetailsFormPanel1.setPreferredSize(new java.awt.Dimension(440, 280));
 
         enterMobileNoLabel.setText("Enter Customer Mobile No.");
+
+        cusMobileInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cusMobileInputKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout cusSearchInputPanelLayout = new javax.swing.GroupLayout(cusSearchInputPanel);
         cusSearchInputPanel.setLayout(cusSearchInputPanelLayout);
@@ -1236,6 +1267,12 @@ public class CashierDashboard extends javax.swing.JFrame {
         myMobilePanel.setPreferredSize(new java.awt.Dimension(450, 56));
 
         myMobileLabel.setText("Mobile No.");
+
+        myMobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                myMobileKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout myMobilePanelLayout = new javax.swing.GroupLayout(myMobilePanel);
         myMobilePanel.setLayout(myMobilePanelLayout);
@@ -1659,6 +1696,10 @@ public class CashierDashboard extends javax.swing.JFrame {
 
     private void customerMobileNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerMobileNoKeyTyped
         // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_customerMobileNoKeyTyped
 
     private void customerMobileNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerMobileNoKeyReleased
@@ -1704,6 +1745,42 @@ public class CashierDashboard extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_addPointsBtnActionPerformed
+
+    private void pointsToAddKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pointsToAddKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_pointsToAddKeyTyped
+
+    private void cusMobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cusMobileKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_cusMobileKeyTyped
+
+    private void cusMobileInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cusMobileInputKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_cusMobileInputKeyTyped
+
+    private void myMobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_myMobileKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_myMobileKeyTyped
+
+    private void itemsTableKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemsTableKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemsTableKeyTyped
 
     /**
      * @param args the command line arguments
