@@ -1367,14 +1367,14 @@ public class AdminDashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Order_ID", "Customer_Mobile", "Date", "Discount", "Points", "Total", "Items"
+                "Order_ID", "Customer_Mobile", "Date", "Points", "Total", "Items"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1804,7 +1804,6 @@ public class AdminDashboard extends javax.swing.JFrame {
                             sale.getId(),
                             sale.getCusMobile(),
                             sale.getDate(),
-                            sale.getDiscount(),
                             sale.getPoints(),
                             sale.getGrossTotal()
                         };

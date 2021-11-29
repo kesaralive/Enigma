@@ -9,7 +9,6 @@ import java.util.List;
 public class SalesController {
     private String id;
     private String cusMobile;
-    private String discount;
     private String grossTotal;
     private String points;
     private Date date;
@@ -35,6 +34,16 @@ public class SalesController {
         List<SalesController> sales = sm.getSales();
         return sales;
     }
+    
+    public boolean addSale (String cusMobileNo, String points, String total) throws SQLException {
+        SalesModel sm = new SalesModel();
+        
+        if(sm.addSale(cusMobileNo, points, total)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     //Getters
     public String getId() {
@@ -43,10 +52,6 @@ public class SalesController {
     
     public String getCusMobile(){
         return cusMobile;
-    }
-
-    public String getDiscount(){
-        return discount;
     }
 
     public String getGrossTotal(){
@@ -68,10 +73,6 @@ public class SalesController {
     
     public void setCusMobile(String cusMobile){
         this.cusMobile = cusMobile;
-    }
-
-    public void setDiscount(String discount){
-        this.discount = discount;
     }
 
     public void setGrossTotal(String grossTotal){

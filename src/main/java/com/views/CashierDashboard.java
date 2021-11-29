@@ -33,9 +33,16 @@ public class CashierDashboard extends javax.swing.JFrame {
     /**
      * Creates new form CashierDashboard
      */
+   
     Integer item = 0;
     Dictionary itemList = new Hashtable();
     List<Integer> priceList = new ArrayList();
+    float subTotal;
+    float calcGrossTotal;
+    int balancePoints;
+    int pointsNeeded = 0;
+    int currPoints;
+    
     public CashierDashboard() throws SQLException {
         initComponents();
         setSize(900,520);
@@ -95,15 +102,10 @@ public class CashierDashboard extends javax.swing.JFrame {
         addPointsPanel = new javax.swing.JPanel();
         pointsToAdd = new javax.swing.JTextField();
         addPointsBtn = new javax.swing.JButton();
-        discountCheckPanel = new javax.swing.JPanel();
-        addDiscountCheck = new javax.swing.JCheckBox();
         totalSummaryPanel = new javax.swing.JPanel();
         subtotalPanel = new javax.swing.JPanel();
         subtotal = new javax.swing.JLabel();
         subtotalLabel = new javax.swing.JLabel();
-        discountPanel = new javax.swing.JPanel();
-        discount = new javax.swing.JLabel();
-        discountLabel = new javax.swing.JLabel();
         pointsPanel = new javax.swing.JPanel();
         points = new javax.swing.JLabel();
         pointsLabel = new javax.swing.JLabel();
@@ -256,7 +258,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
                 true, true, false
@@ -311,12 +313,13 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         orderSummaryPanel.setPreferredSize(new java.awt.Dimension(350, 520));
 
-        customerDetailsPanel.setPreferredSize(new java.awt.Dimension(350, 150));
+        customerDetailsPanel.setPreferredSize(new java.awt.Dimension(350, 200));
 
         cutomerMobilePanel.setPreferredSize(new java.awt.Dimension(321, 65));
 
         cusMobilleLabel.setText("Customer Mobile No:");
 
+        customerMobileNo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         customerMobileNo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 customerMobileNoKeyReleased(evt);
@@ -368,6 +371,7 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         totalPointsLabel.setText("Total Points:");
 
+        totalPoints.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         totalPoints.setPreferredSize(new java.awt.Dimension(0, 20));
 
         javax.swing.GroupLayout totalPointsPanelLayout = new javax.swing.GroupLayout(totalPointsPanel);
@@ -434,39 +438,14 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         orderSummaryPanel.add(customerDetailsPanel);
 
-        discountCheckPanel.setPreferredSize(new java.awt.Dimension(350, 30));
-
-        addDiscountCheck.setText("Add Discount");
-        addDiscountCheck.setIconTextGap(10);
-        addDiscountCheck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addDiscountCheckActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout discountCheckPanelLayout = new javax.swing.GroupLayout(discountCheckPanel);
-        discountCheckPanel.setLayout(discountCheckPanelLayout);
-        discountCheckPanelLayout.setHorizontalGroup(
-            discountCheckPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, discountCheckPanelLayout.createSequentialGroup()
-                .addContainerGap(186, Short.MAX_VALUE)
-                .addComponent(addDiscountCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
-        );
-        discountCheckPanelLayout.setVerticalGroup(
-            discountCheckPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discountCheckPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(addDiscountCheck)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        orderSummaryPanel.add(discountCheckPanel);
-
         totalSummaryPanel.setPreferredSize(new java.awt.Dimension(350, 125));
         totalSummaryPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 2, 0));
 
         subtotalPanel.setPreferredSize(new java.awt.Dimension(321, 30));
+
+        subtotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        subtotal.setText("0.0");
+        subtotal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         subtotalLabel.setText("Subtotal");
 
@@ -493,34 +472,10 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         totalSummaryPanel.add(subtotalPanel);
 
-        discountPanel.setPreferredSize(new java.awt.Dimension(321, 30));
-
-        discountLabel.setText("Discount");
-
-        javax.swing.GroupLayout discountPanelLayout = new javax.swing.GroupLayout(discountPanel);
-        discountPanel.setLayout(discountPanelLayout);
-        discountPanelLayout.setHorizontalGroup(
-            discountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discountPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(discountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(discount, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        discountPanelLayout.setVerticalGroup(
-            discountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discountPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(discountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(discountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(discount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(3, 3, 3))
-        );
-
-        totalSummaryPanel.add(discountPanel);
-
         pointsPanel.setPreferredSize(new java.awt.Dimension(321, 30));
+
+        points.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        points.setText("0");
 
         pointsLabel.setText("Points");
 
@@ -548,6 +503,9 @@ public class CashierDashboard extends javax.swing.JFrame {
         totalSummaryPanel.add(pointsPanel);
 
         grossTotalPanel.setPreferredSize(new java.awt.Dimension(321, 30));
+
+        grossTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        grossTotal.setText("0.0");
 
         grossTotalLabel.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         grossTotalLabel.setText("Gross total");
@@ -580,6 +538,11 @@ public class CashierDashboard extends javax.swing.JFrame {
         checkoutBtnPanel.setPreferredSize(new java.awt.Dimension(350, 50));
 
         checkoutBtn.setText("Checkout");
+        checkoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkoutBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout checkoutBtnPanelLayout = new javax.swing.GroupLayout(checkoutBtnPanel);
         checkoutBtnPanel.setLayout(checkoutBtnPanelLayout);
@@ -643,17 +606,17 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         orderDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Order_ID", "Customer_Mobile", "Date", "Discount", "Points", "Total", "Items"
+                "Order_ID", "Customer_Mobile", "Date", "Points", "Total", "Items"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -681,10 +644,9 @@ public class CashierDashboard extends javax.swing.JFrame {
             orderDetailsTable.getColumnModel().getColumn(0).setMaxWidth(100);
             orderDetailsTable.getColumnModel().getColumn(2).setPreferredWidth(120);
             orderDetailsTable.getColumnModel().getColumn(2).setMaxWidth(120);
-            orderDetailsTable.getColumnModel().getColumn(3).setPreferredWidth(60);
-            orderDetailsTable.getColumnModel().getColumn(4).setPreferredWidth(100);
-            orderDetailsTable.getColumnModel().getColumn(4).setMaxWidth(100);
-            orderDetailsTable.getColumnModel().getColumn(5).setPreferredWidth(60);
+            orderDetailsTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            orderDetailsTable.getColumnModel().getColumn(3).setMaxWidth(100);
+            orderDetailsTable.getColumnModel().getColumn(4).setPreferredWidth(60);
         }
 
         salesTablePanel.add(orderDetailsTablePanel);
@@ -1569,25 +1531,27 @@ public class CashierDashboard extends javax.swing.JFrame {
         switchPanels(settingsPanel);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void addDiscountCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDiscountCheckActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addDiscountCheckActionPerformed
-
     private void addItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemBtnActionPerformed
         // TODO add your handling code here:
-        //itemsTable.setCellSelectionEnabled(true);
-        //itemsTable.changeSelection(item, 3, false, false);
-        //itemsTable.requestFocus();
+
         DefaultTableModel model = (DefaultTableModel)itemsTable.getModel();
         String itemName = itemsTable.getModel().getValueAt(item,0).toString();
         Integer itemQuantity = Integer.parseInt(itemsTable.getModel().getValueAt(item, 1).toString());
         Integer itemPrice = Integer.parseInt(itemList.get(itemName).toString());
-//        System.out.println(itemName + "" + itemQuantity + "" + itemPrice*itemQuantity);
         priceList.add(itemPrice*itemQuantity);
         itemsTable.getModel().setValueAt(itemPrice*itemQuantity, item, 2);
-//        System.out.println(priceList.stream().mapToInt(Integer::intValue).sum());
         item++;
         model.addRow(new Object[]{});
+        
+        int intSubTotal = priceList.stream().mapToInt(Integer::intValue).sum();
+        
+        // Calculating Subtotal
+        subTotal = (float)intSubTotal;
+        subtotal.setText(String.valueOf(subTotal));
+        
+        // Calculating Gross total
+        calcGrossTotal = subTotal - Integer.parseInt(points.getText());
+        grossTotal.setText(String.valueOf(subTotal));
     }//GEN-LAST:event_addItemBtnActionPerformed
 
     private void myAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myAddressActionPerformed
@@ -1681,7 +1645,6 @@ public class CashierDashboard extends javax.swing.JFrame {
                             sale.getId(),
                             sale.getCusMobile(),
                             sale.getDate(),
-                            sale.getDiscount(),
                             sale.getPoints(),
                             sale.getGrossTotal()
                         };
@@ -1728,15 +1691,16 @@ public class CashierDashboard extends javax.swing.JFrame {
             // TODO add your handling code here:
             String cusMobileNo = customerMobileNo.getText();
             CustomerController cc = new CustomerController().getCustomerPoints(cusMobileNo);
-            int pointsNeeded = Integer.parseInt(pointsToAdd.getText());
-            int currPoints = cc.getPoints();
-            if(pointsNeeded < currPoints) {
-                int balancePoints = currPoints - pointsNeeded;
-                if(cc.deductPoints(balancePoints, cusMobileNo)) {
-                    points.setText(pointsToAdd.getText());
-                } else {
-                    JOptionPane.showMessageDialog(null,"Could not deduct points");
-                }
+            pointsNeeded = Integer.parseInt(pointsToAdd.getText());
+            currPoints = cc.getPoints();
+            
+            if(pointsNeeded <= currPoints && pointsNeeded >= 100) {
+                points.setText(pointsToAdd.getText());
+                
+                // Calculating Gross total
+                calcGrossTotal = subTotal - pointsNeeded;
+                grossTotal.setText(String.valueOf(calcGrossTotal));
+
             } else {
                 JOptionPane.showMessageDialog(null,"Insufficient points");
             }
@@ -1781,6 +1745,51 @@ public class CashierDashboard extends javax.swing.JFrame {
     private void itemsTableKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemsTableKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_itemsTableKeyTyped
+
+    private void checkoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            SalesController sc = new SalesController();
+            String cusMobileNo = customerMobileNo.getText();
+            String pointss = String.valueOf(pointsNeeded);
+            String total = String.valueOf(calcGrossTotal);
+            balancePoints = currPoints - pointsNeeded;
+            
+            CustomerController cc = new CustomerController();
+            
+            if(sc.addSale(cusMobileNo, pointss, total) && cc.deductPoints(balancePoints, cusMobileNo)){
+                balancePoints = currPoints - pointsNeeded;
+                
+                JOptionPane.showMessageDialog(null, "Checkout complete!");
+                customerMobileNo.setText("");
+                points.setText("");
+                pointsToAdd.setText("");
+                totalPoints.setText("");
+                subtotal.setText("0.0");
+                points.setText("0");
+                grossTotal.setText("0.0");
+                
+                subTotal = 0;
+                calcGrossTotal = 0;
+                balancePoints = 0;
+                pointsNeeded = 0;
+                currPoints = 0;
+                item = 0;
+                
+                priceList.clear();
+
+                DefaultTableModel tMOdel = (DefaultTableModel) itemsTable.getModel();
+                tMOdel.setRowCount(0);
+                tMOdel.setRowCount(1);
+      
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Could not place order");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_checkoutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1837,7 +1846,6 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel addCustomerTitle1;
     private javax.swing.JPanel addCustomerTitlePanel;
     private javax.swing.JPanel addCustomerTitlePanel1;
-    private javax.swing.JCheckBox addDiscountCheck;
     private javax.swing.JButton addItemBtn;
     private javax.swing.JButton addPointsBtn;
     private javax.swing.JPanel addPointsPanel;
@@ -1884,10 +1892,6 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane customersInfoTablePanel;
     private javax.swing.JPanel customersTablePanel;
     private javax.swing.JPanel cutomerMobilePanel;
-    private javax.swing.JLabel discount;
-    private javax.swing.JPanel discountCheckPanel;
-    private javax.swing.JLabel discountLabel;
-    private javax.swing.JPanel discountPanel;
     private javax.swing.JLabel enterMobileNoLabel;
     private javax.swing.JLabel grossTotal;
     private javax.swing.JLabel grossTotalLabel;
