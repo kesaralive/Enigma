@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.models.AdminModel;
+import com.models.CashierModel;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -29,6 +30,14 @@ public class CashierController {
             return false;
         }
     }
+    
+    public CashierController getAccountInfo() throws SQLException {
+        CashierModel cm = new CashierModel();
+        CashierController cc = new CashierController();
+        cc = cm.getAccountInfo();
+        return cc;
+    }
+    
     public Boolean createCashier() throws SQLException {
         String[] cashier = {this.username, this.name, this.mobile, this.address, this.password};
         AdminModel am = new AdminModel();

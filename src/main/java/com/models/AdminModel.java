@@ -1,5 +1,6 @@
 package com.models;
 
+import com.controllers.AdminController;
 import com.controllers.CashierController;
 import com.libraries.Database;
 import com.libraries.Session;
@@ -36,7 +37,6 @@ public class AdminModel {
             Session.getSession(res.getInt("id"),"ADMIN"); 
         }
 
-        System.out.println(Session.getID());
         return (flag==1);
     }
 
@@ -89,5 +89,55 @@ public class AdminModel {
             list.add(cc);
         }
         return list;
+    }
+    
+    public static AdminController getAccountInfo() throws SQLException {
+        db = new Database();
+        String id = String.valueOf(Session.getID());
+        
+        db.query("SELECT * from admin where id = ?");
+        db.bindString(1,id);
+        res = db.executeQuery();
+        
+        AdminController ac = new AdminController();
+
+        if(res.next()){
+            ac.setUsername(res.getString("username"));
+            ac.setMobile(res.getString("phone"));
+            ac.setPassword(res.getString("password"));
+        }
+        
+        return ac;
+    }
+    
+    public boolean updateAccountInfo(String newName, String newMobile) throws SQLException {
+        db = new Database();
+        String id = String.valueOf(Session.getID());
+        
+        db.query("UPDATE admin SET username = ?, phone = ? WHERE id = ?");
+        db.bindString(1,newName);
+        db.bindString(2,newMobile);
+        db.bindString(3,id);
+        
+        if(db.executeUpdate()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean changePassword(String newPsd) throws SQLException {
+        db = new Database();
+        String id = String.valueOf(Session.getID());
+        
+        db.query("UPDATE admin SET password = ? WHERE id = ?");
+        db.bindString(1,newPsd);
+        db.bindString(2,id);
+        
+        if(db.executeUpdate()>0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

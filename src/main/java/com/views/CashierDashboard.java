@@ -1052,12 +1052,17 @@ public class CashierDashboard extends javax.swing.JFrame {
         settingsPanel.setLayout(new java.awt.BorderLayout());
 
         left.setPreferredSize(new java.awt.Dimension(350, 500));
+        left.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                leftHierarchyChanged(evt);
+            }
+        });
 
-        cashMobile.setText("+94 76 123 7895");
+        cashMobile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        cashName.setText("John Doe");
+        cashName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        cashAddress.setText("21, Jump Street.");
+        cashAddress.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1074,12 +1079,11 @@ public class CashierDashboard extends javax.swing.JFrame {
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cashName)
+                .addComponent(cashName, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cashAddress)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cashMobile)
+                .addComponent(cashAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cashMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1097,7 +1101,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(leftLayout.createSequentialGroup()
                 .addGap(194, 194, 194)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
 
         settingsPanel.add(left, java.awt.BorderLayout.WEST);
@@ -1542,6 +1546,22 @@ public class CashierDashboard extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_searchCustomerBtnActionPerformed
+
+    private void leftHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_leftHierarchyChanged
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            CashierController ac = new CashierController().getAccountInfo();
+            cashName.setText(ac.getUsername());
+            cashMobile.setText(ac.getMobile());
+            cashAddress.setText(ac.getAddress());
+            myName.setText(ac.getUsername());
+            myMobile.setText(ac.getMobile());
+            myAddress.setText(ac.getMobile());
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_leftHierarchyChanged
 
     /**
      * @param args the command line arguments

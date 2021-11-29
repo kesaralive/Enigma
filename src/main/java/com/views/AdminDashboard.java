@@ -5,6 +5,7 @@
  */
 package com.views;
 
+import com.controllers.AdminController;
 import com.controllers.CashierController;
 import com.controllers.CustomerController;
 import com.controllers.ProductController;
@@ -127,15 +128,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         adminMobile = new javax.swing.JLabel();
         adminName = new javax.swing.JLabel();
-        adminAddress = new javax.swing.JLabel();
         right = new javax.swing.JPanel();
         rightTopPanel = new javax.swing.JPanel();
         myNamePanel = new javax.swing.JPanel();
         myNameLabel = new javax.swing.JLabel();
         myName = new javax.swing.JTextField();
-        myAddressPanel = new javax.swing.JPanel();
-        myAddressLabel = new javax.swing.JLabel();
-        myAddress = new javax.swing.JTextField();
         myMobilePanel = new javax.swing.JPanel();
         myMobileLabel = new javax.swing.JLabel();
         myMobile = new javax.swing.JTextField();
@@ -569,7 +566,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addComponent(usernamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cashNamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(passwordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
+                    .addComponent(passwordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE))
                 .addGap(40, 40, 40))
         );
         cashierDetailsFormPanelLayout.setVerticalGroup(
@@ -938,12 +935,20 @@ public class AdminDashboard extends javax.swing.JFrame {
         settingsPanel.setLayout(new java.awt.BorderLayout());
 
         left.setPreferredSize(new java.awt.Dimension(350, 500));
+        left.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                leftHierarchyChanged(evt);
+            }
+        });
 
-        adminMobile.setText("+94 76 123 7895");
+        adminMobile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        adminName.setText("John Doe");
-
-        adminAddress.setText("21, Jump Street.");
+        adminName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        adminName.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                adminNameHierarchyChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -953,19 +958,16 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(adminMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(adminAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(adminName, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(adminName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(adminName)
+                .addGap(27, 27, 27)
+                .addComponent(adminName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(adminAddress)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(adminMobile)
+                .addComponent(adminMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -983,7 +985,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(leftLayout.createSequentialGroup()
                 .addGap(194, 194, 194)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         settingsPanel.add(left, java.awt.BorderLayout.WEST);
@@ -994,7 +996,13 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         myNamePanel.setPreferredSize(new java.awt.Dimension(450, 52));
 
-        myNameLabel.setText("Name");
+        myNameLabel.setText("Username");
+
+        myName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myNameActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout myNamePanelLayout = new javax.swing.GroupLayout(myNamePanel);
         myNamePanel.setLayout(myNamePanelLayout);
@@ -1005,7 +1013,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGroup(myNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(myNamePanelLayout.createSequentialGroup()
                         .addComponent(myNameLabel)
-                        .addGap(265, 411, Short.MAX_VALUE))
+                        .addGap(265, 389, Short.MAX_VALUE))
                     .addGroup(myNamePanelLayout.createSequentialGroup()
                         .addComponent(myName)
                         .addContainerGap())))
@@ -1021,42 +1029,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         );
 
         rightTopPanel.add(myNamePanel);
-
-        myAddressPanel.setPreferredSize(new java.awt.Dimension(450, 40));
-
-        myAddressLabel.setText("Address");
-
-        myAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myAddressActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout myAddressPanelLayout = new javax.swing.GroupLayout(myAddressPanel);
-        myAddressPanel.setLayout(myAddressPanelLayout);
-        myAddressPanelLayout.setHorizontalGroup(
-            myAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(myAddressPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(myAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(myAddressPanelLayout.createSequentialGroup()
-                        .addComponent(myAddressLabel)
-                        .addGap(299, 396, Short.MAX_VALUE))
-                    .addGroup(myAddressPanelLayout.createSequentialGroup()
-                        .addComponent(myAddress)
-                        .addContainerGap())))
-        );
-        myAddressPanelLayout.setVerticalGroup(
-            myAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(myAddressPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(myAddressLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(myAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        rightTopPanel.add(myAddressPanel);
 
         myMobilePanel.setPreferredSize(new java.awt.Dimension(450, 56));
 
@@ -1098,11 +1070,21 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         saveChangesBtn.setText("Save Changes");
         saveChangesBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+        saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangesBtnActionPerformed(evt);
+            }
+        });
 
         cancelChangesBtn.setText("Cancel");
         cancelChangesBtn.setMaximumSize(new java.awt.Dimension(75, 25));
         cancelChangesBtn.setMinimumSize(new java.awt.Dimension(75, 25));
         cancelChangesBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+        cancelChangesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelChangesBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout myInfoActionPanelLayout = new javax.swing.GroupLayout(myInfoActionPanel);
         myInfoActionPanel.setLayout(myInfoActionPanelLayout);
@@ -1129,6 +1111,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         right.add(rightTopPanel);
 
         rightBottomPanel.setPreferredSize(new java.awt.Dimension(550, 250));
+        rightBottomPanel.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                rightBottomPanelHierarchyChanged(evt);
+            }
+        });
 
         currPasswordLabel.setText("Current Password");
 
@@ -1221,11 +1208,21 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         saveNewPasswordBtn.setText("Save Changes");
         saveNewPasswordBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+        saveNewPasswordBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveNewPasswordBtnActionPerformed(evt);
+            }
+        });
 
         cancelPasswordChangeBtn.setText("Cancel");
         cancelPasswordChangeBtn.setMaximumSize(new java.awt.Dimension(75, 25));
         cancelPasswordChangeBtn.setMinimumSize(new java.awt.Dimension(75, 25));
         cancelPasswordChangeBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+        cancelPasswordChangeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelPasswordChangeBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout myPasswordActionPanelLayout = new javax.swing.GroupLayout(myPasswordActionPanel);
         myPasswordActionPanel.setLayout(myPasswordActionPanelLayout);
@@ -1575,10 +1572,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cashMobileKeyTyped
 
-    private void myAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myAddressActionPerformed
-
     private void myMobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_myMobileKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
@@ -1704,6 +1697,94 @@ public class AdminDashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_customersInfoTableHierarchyChanged
 
+    private void adminNameHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_adminNameHierarchyChanged
+        
+    }//GEN-LAST:event_adminNameHierarchyChanged
+
+    private void leftHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_leftHierarchyChanged
+        try {
+            // TODO add your handling code here:
+            AdminController ac = new AdminController().getAccountInfo();
+            adminName.setText(ac.getUsername());
+            adminMobile.setText(ac.getMobile());
+            myName.setText(ac.getUsername());
+            myMobile.setText(ac.getMobile());
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_leftHierarchyChanged
+
+    private void myNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myNameActionPerformed
+
+    private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            AdminController ac = new AdminController();
+            String newName = myName.getText();
+            String newMobile = myMobile.getText();
+            if(ac.updateAccountInfo(newName, newMobile)) {
+                AdminController uac = new AdminController().getAccountInfo();
+                adminName.setText(uac.getUsername());
+                adminMobile.setText(uac.getMobile());
+                myName.setText(uac.getUsername());
+                myMobile.setText(uac.getMobile());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_saveChangesBtnActionPerformed
+
+    private void cancelChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelChangesBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            AdminController ac = new AdminController().getAccountInfo();
+            myName.setText(ac.getUsername());
+            myMobile.setText(ac.getMobile());
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cancelChangesBtnActionPerformed
+
+    private void rightBottomPanelHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_rightBottomPanelHierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rightBottomPanelHierarchyChanged
+
+    private void saveNewPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewPasswordBtnActionPerformed
+        // TODO add your handling code here:
+        String currentPsd = new String(currPassword.getPassword());
+        String newPsd = new String(newPassword.getPassword());
+        String confPsd = new String(confPassword.getPassword());
+        
+        if(newPsd.equals(confPsd)) {
+            try {
+                AdminController ac = new AdminController();
+                if(ac.changePassword(currentPsd, newPsd)) {
+                    JOptionPane.showMessageDialog(null,"Password updated successfully");
+                    currPassword.setText("");
+                    newPassword.setText("");
+                    confPassword.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null,"Password change failed");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,"Passwords do not match.");
+            newPassword.setText("");
+            confPassword.setText("");
+        }
+    }//GEN-LAST:event_saveNewPasswordBtnActionPerformed
+
+    private void cancelPasswordChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelPasswordChangeBtnActionPerformed
+        // TODO add your handling code here:
+        currPassword.setText("");
+        newPassword.setText("");
+        confPassword.setText("");
+    }//GEN-LAST:event_cancelPasswordChangeBtnActionPerformed
+
 
 // 
 //ButtonColumn buttonColumn = new ButtonColumn(table, delete, 2);
@@ -1768,7 +1849,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel addProductTitlePanel;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JPanel addressPanel;
-    private javax.swing.JLabel adminAddress;
     private javax.swing.JLabel adminMobile;
     private javax.swing.JLabel adminName;
     private javax.swing.JButton cancelChangesBtn;
@@ -1836,9 +1916,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel left;
-    private javax.swing.JTextField myAddress;
-    private javax.swing.JLabel myAddressLabel;
-    private javax.swing.JPanel myAddressPanel;
     private javax.swing.JPanel myInfoActionPanel;
     private javax.swing.JTextField myMobile;
     private javax.swing.JLabel myMobileLabel;
