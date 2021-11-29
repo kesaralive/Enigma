@@ -9,6 +9,7 @@ import com.controllers.AdminController;
 import com.controllers.CashierController;
 import com.controllers.CustomerController;
 import com.controllers.ProductController;
+import com.controllers.SalesController;
 import java.awt.event.ActionEvent;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.KeyEvent;
@@ -560,7 +561,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         cashierDetailsFormPanelLayout.setHorizontalGroup(
             cashierDetailsFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cashierDetailsFormPanelLayout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(cashierDetailsFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cashNamePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(usernamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1366,14 +1367,14 @@ public class AdminDashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Order_ID", "Customer_Mobile", "Date", "Items", "Discount", "Points", "Total"
+                "Order_ID", "Customer_Mobile", "Date", "Discount", "Points", "Total", "Items"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Float.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1387,6 +1388,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         orderDetailsTable.setIntercellSpacing(new java.awt.Dimension(2, 2));
         orderDetailsTable.setRowHeight(20);
         orderDetailsTable.setShowGrid(true);
+        orderDetailsTable.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                orderDetailsTableHierarchyChanged(evt);
+            }
+        });
         orderDetailsTablePanel.setViewportView(orderDetailsTable);
 
         salesTablePanel.add(orderDetailsTablePanel);
@@ -1784,6 +1790,32 @@ public class AdminDashboard extends javax.swing.JFrame {
         newPassword.setText("");
         confPassword.setText("");
     }//GEN-LAST:event_cancelPasswordChangeBtnActionPerformed
+
+    private void orderDetailsTableHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_orderDetailsTableHierarchyChanged
+        // TODO add your handling code here:
+        if ((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && orderDetailsTable.isShowing()) {
+            try {
+                List<SalesController> sales = SalesController.viewSales();
+                DefaultTableModel dtm = (DefaultTableModel) orderDetailsTable.getModel();
+                dtm.setRowCount(0);
+                if (sales != null) {
+                    for (SalesController sale : sales) {
+                        Object[] data = {
+                            sale.getId(),
+                            sale.getCusMobile(),
+                            sale.getDate(),
+                            sale.getDiscount(),
+                            sale.getPoints(),
+                            sale.getGrossTotal()
+                        };
+                        dtm.addRow(data);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_orderDetailsTableHierarchyChanged
 
 
 // 

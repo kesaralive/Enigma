@@ -310,7 +310,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(cutomerMobilePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cusMobilleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(cusMobileNo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -339,7 +339,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(totalPointsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(totalPointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(totalPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -366,7 +366,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(addPointsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pointsToAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(addPointsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -426,7 +426,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(subtotalPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(subtotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -453,7 +453,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(discountPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(discountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(discount, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -480,7 +480,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(pointsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pointsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(points, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -508,7 +508,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(grossTotalPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(grossTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(grossTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -571,10 +571,10 @@ public class CashierDashboard extends javax.swing.JFrame {
         orderDetailsTitlePanel.setLayout(orderDetailsTitlePanelLayout);
         orderDetailsTitlePanelLayout.setHorizontalGroup(
             orderDetailsTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderDetailsTitlePanelLayout.createSequentialGroup()
-                .addContainerGap(450, Short.MAX_VALUE)
+            .addGroup(orderDetailsTitlePanelLayout.createSequentialGroup()
+                .addGap(396, 396, 396)
                 .addComponent(orderSecTitle)
-                .addGap(361, 361, 361))
+                .addContainerGap(415, Short.MAX_VALUE))
         );
         orderDetailsTitlePanelLayout.setVerticalGroup(
             orderDetailsTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,20 +592,17 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         orderDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order_ID", "Customer_Mobile", "Date", "Items", "Discount", "Points", "Total"
+                "Order_ID", "Customer_Mobile", "Date", "Discount", "Points", "Total", "Items"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Float.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -617,8 +614,11 @@ public class CashierDashboard extends javax.swing.JFrame {
             }
         });
         orderDetailsTable.setIntercellSpacing(new java.awt.Dimension(2, 2));
+        orderDetailsTable.setMaximumSize(new java.awt.Dimension(900, 500));
+        orderDetailsTable.setPreferredSize(new java.awt.Dimension(900, 500));
         orderDetailsTable.setRowHeight(20);
         orderDetailsTable.setShowGrid(true);
+        orderDetailsTable.getTableHeader().setReorderingAllowed(false);
         orderDetailsTable.addHierarchyListener(new java.awt.event.HierarchyListener() {
             public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
                 orderDetailsTableHierarchyChanged(evt);
@@ -630,12 +630,10 @@ public class CashierDashboard extends javax.swing.JFrame {
             orderDetailsTable.getColumnModel().getColumn(0).setMaxWidth(100);
             orderDetailsTable.getColumnModel().getColumn(2).setPreferredWidth(120);
             orderDetailsTable.getColumnModel().getColumn(2).setMaxWidth(120);
-            orderDetailsTable.getColumnModel().getColumn(4).setPreferredWidth(60);
-            orderDetailsTable.getColumnModel().getColumn(4).setHeaderValue("Discount");
-            orderDetailsTable.getColumnModel().getColumn(5).setPreferredWidth(100);
-            orderDetailsTable.getColumnModel().getColumn(5).setMaxWidth(100);
-            orderDetailsTable.getColumnModel().getColumn(6).setPreferredWidth(60);
-            orderDetailsTable.getColumnModel().getColumn(6).setHeaderValue("Total");
+            orderDetailsTable.getColumnModel().getColumn(3).setPreferredWidth(60);
+            orderDetailsTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+            orderDetailsTable.getColumnModel().getColumn(4).setMaxWidth(100);
+            orderDetailsTable.getColumnModel().getColumn(5).setPreferredWidth(60);
         }
 
         salesTablePanel.add(orderDetailsTablePanel);
@@ -818,7 +816,7 @@ public class CashierDashboard extends javax.swing.JFrame {
         customerDetailsFormPanelLayout.setHorizontalGroup(
             customerDetailsFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerDetailsFormPanelLayout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(customerDetailsFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cusMobilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1121,7 +1119,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             .addGroup(leftLayout.createSequentialGroup()
                 .addGap(89, 89, 89)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         leftLayout.setVerticalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1150,7 +1148,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(myNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(myNamePanelLayout.createSequentialGroup()
                         .addComponent(myNameLabel)
-                        .addGap(265, 413, Short.MAX_VALUE))
+                        .addGap(265, 411, Short.MAX_VALUE))
                     .addGroup(myNamePanelLayout.createSequentialGroup()
                         .addComponent(myName)
                         .addContainerGap())))
@@ -1186,7 +1184,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(myAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(myAddressPanelLayout.createSequentialGroup()
                         .addComponent(myAddressLabel)
-                        .addGap(299, 401, Short.MAX_VALUE))
+                        .addGap(299, 396, Short.MAX_VALUE))
                     .addGroup(myAddressPanelLayout.createSequentialGroup()
                         .addComponent(myAddress)
                         .addContainerGap())))
@@ -1216,7 +1214,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(myMobilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(myMobilePanelLayout.createSequentialGroup()
                         .addComponent(myMobileLabel)
-                        .addGap(292, 390, Short.MAX_VALUE))
+                        .addGap(292, 389, Short.MAX_VALUE))
                     .addGroup(myMobilePanelLayout.createSequentialGroup()
                         .addComponent(myMobile)
                         .addContainerGap())))
@@ -1309,7 +1307,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(newPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(newPasswordPanelLayout.createSequentialGroup()
                         .addComponent(newPasswordLabel)
-                        .addGap(299, 370, Short.MAX_VALUE))
+                        .addGap(299, 362, Short.MAX_VALUE))
                     .addGroup(newPasswordPanelLayout.createSequentialGroup()
                         .addComponent(newPassword)
                         .addContainerGap())))
@@ -1338,7 +1336,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                 .addGroup(confPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(confPasswordPanelLayout.createSequentialGroup()
                         .addComponent(confPasswordLabel)
-                        .addGap(292, 354, Short.MAX_VALUE))
+                        .addGap(292, 348, Short.MAX_VALUE))
                     .addGroup(confPasswordPanelLayout.createSequentialGroup()
                         .addComponent(confPassword)
                         .addContainerGap())))
@@ -1601,29 +1599,30 @@ public class CashierDashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_leftHierarchyChanged
 
-    private void orderDetailsTableHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_orderDetailsTableHierarchyChanged
+    private void orderDetailsTableHierarchyChanged(HierarchyEvent evt) {//GEN-FIRST:event_orderDetailsTableHierarchyChanged
         // TODO add your handling code here:
-//         if ((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && orderDetailsTablePanel.isShowing()) {
-//            try {
-//                List<SalesController> sales = SalesController.viewSales();
-//                DefaultTableModel dtm = (DefaultTableModel) orderDetailsTablePanel.getModel();
-//                dtm.setRowCount(0);
-//                if (sales != null) {
-//                    for (SalesController sale : sales) {
-//                        Object[] data = {
-//                            sale.getId(),
-//                            sale.getName(),
-//                            sale.getMobile(),
-//                            sale.getAddress(),
-//                            sale.getPoints(),
-//                        };
-//                        dtm.addRow(data);
-//                    }
-//                }
-//            } catch (SQLException ex) {
-//                Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
+         if ((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && orderDetailsTable.isShowing()) {
+            try {
+                List<SalesController> sales = SalesController.viewSales();
+                DefaultTableModel dtm = (DefaultTableModel) orderDetailsTable.getModel();
+                dtm.setRowCount(0);
+                if (sales != null) {
+                    for (SalesController sale : sales) {
+                        Object[] data = {
+                            sale.getId(),
+                            sale.getCusMobile(),
+                            sale.getDate(),
+                            sale.getDiscount(),
+                            sale.getPoints(),
+                            sale.getGrossTotal()
+                        };
+                        dtm.addRow(data);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_orderDetailsTableHierarchyChanged
 
     /**
