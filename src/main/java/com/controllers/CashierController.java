@@ -49,6 +49,25 @@ public class CashierController {
         List<CashierController> cashiers = am.getCashiers();
         return cashiers;
     }
+    
+    public boolean updateAccountInfo(String newName, String newAddress, String newMobile) throws SQLException {
+        CashierModel cm = new CashierModel();
+        if(cm.updateAccountInfo(newName, newAddress, newMobile)){
+           return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean changePassword(String currentPsd, String newPsd) throws SQLException {
+        CashierModel cm = new CashierModel();
+        CashierController cc = new CashierController().getAccountInfo();
+        if(currentPsd.equals(cc.getPassword()) && cm.changePassword(newPsd)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public String getId() {
         return this.id;
