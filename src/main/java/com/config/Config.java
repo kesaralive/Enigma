@@ -12,5 +12,5 @@ package com.config;
 public class Config {
     public static final String DATABASE_URL = "jdbc:mysql://localhost:3306/app";
     public static final String DATABASE_USER = "root";
-    public static final String DATABASE_PASSWORD = "";
+    public static final String DATABASE_PASSWORD = "Kesara1!";
 }

@@ -7,8 +7,12 @@ package com.views;
 
 import com.controllers.CashierController;
 import com.controllers.CustomerController;
+import com.controllers.SalesController;
 import java.awt.event.HierarchyEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +21,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 
 /**
@@ -28,7 +33,10 @@ public class CashierDashboard extends javax.swing.JFrame {
     /**
      * Creates new form CashierDashboard
      */
-    public CashierDashboard() {
+    Integer item = 0;
+    Dictionary itemList = new Hashtable();
+    List<Integer> priceList = new ArrayList();
+    public CashierDashboard() throws SQLException {
         initComponents();
         setSize(900,520);
         setResizable(false);
@@ -36,7 +44,21 @@ public class CashierDashboard extends javax.swing.JFrame {
         
         super.setLocationRelativeTo(null);
         
-        String[] a ={"Item1", "Item2", "Item3"};
+        SalesController sc = new SalesController();
+        String[][] products = sc.getProducts();
+        System.out.println(products[0][1]);
+        
+        int i = 0;
+        
+        String[] a = new String[products.length];
+        
+        for(String[] product : products){
+         a[i] = product[0];
+         itemList.put(product[0], product[1]);
+         i++;
+        }
+//        String[] a ={"asd","asd"};
+        System.out.println(a);
         JComboBox c = new JComboBox(a);
         
         itemsTable.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(c));
@@ -1481,7 +1503,18 @@ public class CashierDashboard extends javax.swing.JFrame {
 
     private void addItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemBtnActionPerformed
         // TODO add your handling code here:
+        //itemsTable.setCellSelectionEnabled(true);
+        //itemsTable.changeSelection(item, 3, false, false);
+        //itemsTable.requestFocus();
         DefaultTableModel model = (DefaultTableModel)itemsTable.getModel();
+        String itemName = itemsTable.getModel().getValueAt(item,0).toString();
+        Integer itemQuantity = Integer.parseInt(itemsTable.getModel().getValueAt(item, 1).toString());
+        Integer itemPrice = Integer.parseInt(itemList.get(itemName).toString());
+        System.out.println(itemName + "" + itemQuantity + "" + itemPrice*itemQuantity);
+        priceList.add(itemPrice*itemQuantity);
+        
+        System.out.println(priceList.stream().mapToInt(Integer::intValue).sum());
+        item++;
         model.addRow(new Object[]{});
     }//GEN-LAST:event_addItemBtnActionPerformed
 
@@ -1593,7 +1626,11 @@ public class CashierDashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CashierDashboard().setVisible(true);
+                try {
+                    new CashierDashboard().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
