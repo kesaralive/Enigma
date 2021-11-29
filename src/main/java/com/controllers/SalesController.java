@@ -1,6 +1,8 @@
 package com.controllers;
 
 import com.models.SalesModel;
+
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,6 +12,7 @@ public class SalesController {
     private String discount;
     private String grossTotal;
     private String points;
+    private Date date;
 
     public static void main(String[] args) throws SQLException {
     }
@@ -25,8 +28,8 @@ public class SalesController {
         }
         return products;
     }
-    
-    public static List<SalesController> viewCashiers() throws SQLException{
+
+    List<SalesController> viewSales() throws SQLException {
         SalesModel sm = new SalesModel();
         List<SalesController> sales = sm.getSales();
         return sales;
@@ -72,5 +75,9 @@ public class SalesController {
 
     public void setPoints(String points){
         this.points = points;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

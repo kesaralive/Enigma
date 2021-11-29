@@ -1603,27 +1603,27 @@ public class CashierDashboard extends javax.swing.JFrame {
 
     private void orderDetailsTableHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_orderDetailsTableHierarchyChanged
         // TODO add your handling code here:
-         if ((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && orderDetailsTablePanel.isShowing()) {
-            try {
-                List<SalesController> sales = SalesController.viewSales();
-                DefaultTableModel dtm = (DefaultTableModel) orderDetailsTablePanel.getModel();
-                dtm.setRowCount(0);
-                if (sales != null) {
-                    for (SalesController sale : sales) {
-                        Object[] data = {
-                            sale.getId(),
-                            sale.getName(),
-                            sale.getMobile(),
-                            sale.getAddress(),
-                            sale.getPoints(),
-                        };
-                        dtm.addRow(data);
-                    }
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//         if ((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && orderDetailsTablePanel.isShowing()) {
+//            try {
+//                List<SalesController> sales = SalesController.viewSales();
+//                DefaultTableModel dtm = (DefaultTableModel) orderDetailsTablePanel.getModel();
+//                dtm.setRowCount(0);
+//                if (sales != null) {
+//                    for (SalesController sale : sales) {
+//                        Object[] data = {
+//                            sale.getId(),
+//                            sale.getName(),
+//                            sale.getMobile(),
+//                            sale.getAddress(),
+//                            sale.getPoints(),
+//                        };
+//                        dtm.addRow(data);
+//                    }
+//                }
+//            } catch (SQLException ex) {
+//                Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
     }//GEN-LAST:event_orderDetailsTableHierarchyChanged
 
     /**
