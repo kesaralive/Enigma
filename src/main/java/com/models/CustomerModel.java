@@ -48,4 +48,43 @@ public class CustomerModel {
         }
         return cc;
     }
+    
+    public boolean customerExists(String cusMobile) throws Exception {
+        db = new Database();
+        db.query("SELECT * FROM customer where mobile = ?");
+        db.bindString(1, cusMobile);
+        res = db.executeQuery();
+        if(res.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public static CustomerController getCustomerPoints(String cusMobileNo) throws Exception {
+        db = new Database();
+        db.query("SELECT * FROM customer where mobile = ?");
+        db.bindString(1, cusMobileNo);
+        res = db.executeQuery();
+        
+        CustomerController cc = new CustomerController();
+        
+        if(res.next()) {
+            cc.setPoints(res.getInt("points"));
+        }
+        return cc;
+    }
+    
+    public boolean deductPoints(int balancePoints, String cusMobileNo) throws SQLException {
+        db = new Database();
+        db.query("UPDATE customer SET points = ? WHERE mobile = ?");
+        db.bindString(1,String.valueOf(balancePoints));
+        db.bindString(2,cusMobileNo);
+        
+        if(db.executeUpdate()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
