@@ -1725,11 +1725,14 @@ public class AdminDashboard extends javax.swing.JFrame {
             String newName = myName.getText();
             String newMobile = myMobile.getText();
             if(ac.updateAccountInfo(newName, newMobile)) {
+                JOptionPane.showMessageDialog(null,"Profile info updated successfully");
                 AdminController uac = new AdminController().getAccountInfo();
                 adminName.setText(uac.getUsername());
                 adminMobile.setText(uac.getMobile());
                 myName.setText(uac.getUsername());
                 myMobile.setText(uac.getMobile());
+            } else {
+                JOptionPane.showMessageDialog(null,"Could not update Profile :(");
             }
         } catch (SQLException ex) {
             Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
@@ -1767,6 +1770,9 @@ public class AdminDashboard extends javax.swing.JFrame {
                     confPassword.setText("");
                 } else {
                     JOptionPane.showMessageDialog(null,"Password change failed");
+                    currPassword.setText("");
+                    newPassword.setText("");
+                    confPassword.setText("");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);

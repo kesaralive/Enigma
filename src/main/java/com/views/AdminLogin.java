@@ -53,6 +53,7 @@ public class AdminLogin extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 11, -1, -1));
 
         usernameAdmin.setFont(new java.awt.Font("Helvetica", 0, 11)); // NOI18N
+        usernameAdmin.setMaximumSize(new java.awt.Dimension(200, 30));
         usernameAdmin.setPreferredSize(new java.awt.Dimension(200, 30));
         jPanel1.add(usernameAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 31, 253, -1));
 
@@ -64,11 +65,7 @@ public class AdminLogin extends javax.swing.JFrame {
         btnLoginAdmin.setPreferredSize(new java.awt.Dimension(252, 30));
         btnLoginAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    btnLoginAdminActionPerformed(evt);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                btnLoginAdminActionPerformed(evt);
             }
         });
         jPanel1.add(btnLoginAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 133, -1, -1));
