@@ -1510,10 +1510,10 @@ public class CashierDashboard extends javax.swing.JFrame {
         String itemName = itemsTable.getModel().getValueAt(item,0).toString();
         Integer itemQuantity = Integer.parseInt(itemsTable.getModel().getValueAt(item, 1).toString());
         Integer itemPrice = Integer.parseInt(itemList.get(itemName).toString());
-        System.out.println(itemName + "" + itemQuantity + "" + itemPrice*itemQuantity);
+//        System.out.println(itemName + "" + itemQuantity + "" + itemPrice*itemQuantity);
         priceList.add(itemPrice*itemQuantity);
-        
-        System.out.println(priceList.stream().mapToInt(Integer::intValue).sum());
+        itemsTable.getModel().setValueAt(itemPrice*itemQuantity, item, 2);
+//        System.out.println(priceList.stream().mapToInt(Integer::intValue).sum());
         item++;
         model.addRow(new Object[]{});
     }//GEN-LAST:event_addItemBtnActionPerformed
