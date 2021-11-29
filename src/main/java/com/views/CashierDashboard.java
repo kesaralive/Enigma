@@ -1058,23 +1058,24 @@ public class CashierDashboard extends javax.swing.JFrame {
             }
         });
 
+        jPanel10.setPreferredSize(new java.awt.Dimension(250, 89));
+
         cashMobile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cashMobile.setPreferredSize(new java.awt.Dimension(250, 0));
 
         cashName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cashName.setPreferredSize(new java.awt.Dimension(250, 0));
 
         cashAddress.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cashAddress.setPreferredSize(new java.awt.Dimension(250, 0));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cashMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cashAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cashName, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .addComponent(cashName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cashAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cashMobile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1091,17 +1092,17 @@ public class CashierDashboard extends javax.swing.JFrame {
         left.setLayout(leftLayout);
         leftLayout.setHorizontalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(leftLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftLayout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
         leftLayout.setVerticalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftLayout.createSequentialGroup()
-                .addGap(194, 194, 194)
+                .addGap(197, 197, 197)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
 
         settingsPanel.add(left, java.awt.BorderLayout.WEST);
@@ -1210,11 +1211,21 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         saveChangesBtn.setText("Save Changes");
         saveChangesBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+        saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangesBtnActionPerformed(evt);
+            }
+        });
 
         cancelChangesBtn.setText("Cancel");
         cancelChangesBtn.setMaximumSize(new java.awt.Dimension(75, 25));
         cancelChangesBtn.setMinimumSize(new java.awt.Dimension(75, 25));
         cancelChangesBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+        cancelChangesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelChangesBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout myInfoActionPanelLayout = new javax.swing.GroupLayout(myInfoActionPanel);
         myInfoActionPanel.setLayout(myInfoActionPanelLayout);
@@ -1332,11 +1343,21 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         saveNewPasswordBtn.setText("Save Changes");
         saveNewPasswordBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+        saveNewPasswordBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveNewPasswordBtnActionPerformed(evt);
+            }
+        });
 
         cancelPasswordChangeBtn.setText("Cancel");
         cancelPasswordChangeBtn.setMaximumSize(new java.awt.Dimension(75, 25));
         cancelPasswordChangeBtn.setMinimumSize(new java.awt.Dimension(75, 25));
         cancelPasswordChangeBtn.setPreferredSize(new java.awt.Dimension(75, 25));
+        cancelPasswordChangeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelPasswordChangeBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout myPasswordActionPanelLayout = new javax.swing.GroupLayout(myPasswordActionPanel);
         myPasswordActionPanel.setLayout(myPasswordActionPanelLayout);
@@ -1527,7 +1548,7 @@ public class CashierDashboard extends javax.swing.JFrame {
                     }
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_customersInfoTableHierarchyChanged
@@ -1552,16 +1573,97 @@ public class CashierDashboard extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             CashierController ac = new CashierController().getAccountInfo();
-            cashName.setText(ac.getUsername());
+            cashName.setText(ac.getName());
             cashMobile.setText(ac.getMobile());
             cashAddress.setText(ac.getAddress());
-            myName.setText(ac.getUsername());
+            myName.setText(ac.getName());
             myMobile.setText(ac.getMobile());
-            myAddress.setText(ac.getMobile());
+            myAddress.setText(ac.getAddress());
         } catch (SQLException ex) {
-            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_leftHierarchyChanged
+
+    private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            CashierController cc = new CashierController();
+            String newName = myName.getText();
+            String newAddress = myAddress.getText();
+            String newMobile = myMobile.getText();
+            
+            if(cc.updateAccountInfo(newName, newAddress, newMobile)) {
+                JOptionPane.showMessageDialog(null,"Profile info updated successfully");
+                CashierController ucc = new CashierController().getAccountInfo();
+                cashName.setText(ucc.getName());
+                cashAddress.setText(ucc.getAddress());
+                cashMobile.setText(ucc.getMobile());
+                
+                myName.setText(ucc.getName());
+                myAddress.setText(ucc.getAddress());
+                myMobile.setText(ucc.getMobile());
+            } else {
+                JOptionPane.showMessageDialog(null,"Could not update Profile :(");
+                cashName.setText(cc.getUsername());
+                cashAddress.setText(cc.getAddress());
+                cashMobile.setText(cc.getMobile());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_saveChangesBtnActionPerformed
+
+    private void cancelChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelChangesBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            CashierController cc = new CashierController().getAccountInfo();
+            myName.setText(cc.getName());
+            myAddress.setText(cc.getAddress());
+            myMobile.setText(cc.getMobile());
+        } catch (SQLException ex) {
+            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_cancelChangesBtnActionPerformed
+
+    private void saveNewPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewPasswordBtnActionPerformed
+        // TODO add your handling code here:
+        String currentPsd = new String(currPassword.getPassword());
+        String newPsd = new String(newPassword.getPassword());
+        String confPsd = new String(confPassword.getPassword());
+        
+        if(newPsd.equals(confPsd)) {
+            try {
+                CashierController cc = new CashierController();
+                if(cc.changePassword(currentPsd, newPsd)) {
+                    JOptionPane.showMessageDialog(null,"Password updated successfully");
+                    currPassword.setText("");
+                    newPassword.setText("");
+                    confPassword.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null,"Password change failed");
+                    currPassword.setText("");
+                    newPassword.setText("");
+                    confPassword.setText("");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,"Passwords do not match.");
+            newPassword.setText("");
+            confPassword.setText("");
+        }
+    }//GEN-LAST:event_saveNewPasswordBtnActionPerformed
+
+    private void cancelPasswordChangeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelPasswordChangeBtnActionPerformed
+        // TODO add your handling code here:
+        currPassword.setText("");
+        newPassword.setText("");
+        confPassword.setText("");
+    }//GEN-LAST:event_cancelPasswordChangeBtnActionPerformed
 
     /**
      * @param args the command line arguments

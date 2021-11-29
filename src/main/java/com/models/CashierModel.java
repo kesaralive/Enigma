@@ -66,4 +66,36 @@ public class CashierModel {
         
         return cc;
     }
+    
+    public boolean updateAccountInfo(String newName, String newAddress, String newMobile) throws SQLException {
+        db = new Database();
+        String id = String.valueOf(Session.getID());
+        
+        db.query("UPDATE cashier SET name = ?, mobile = ?, address = ? WHERE idcashier = ?");
+        db.bindString(1,newName);
+        db.bindString(2,newMobile);
+        db.bindString(3,newAddress);
+        db.bindString(4,id);
+        
+        if(db.executeUpdate()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean changePassword(String newPsd) throws SQLException {
+        db = new Database();
+        String id = String.valueOf(Session.getID());
+        
+        db.query("UPDATE cashier SET password = ? WHERE idcashier = ?");
+        db.bindString(1,newPsd);
+        db.bindString(2,id);
+        
+        if(db.executeUpdate()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
