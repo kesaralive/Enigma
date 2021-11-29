@@ -619,6 +619,11 @@ public class CashierDashboard extends javax.swing.JFrame {
         orderDetailsTable.setIntercellSpacing(new java.awt.Dimension(2, 2));
         orderDetailsTable.setRowHeight(20);
         orderDetailsTable.setShowGrid(true);
+        orderDetailsTable.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                orderDetailsTableHierarchyChanged(evt);
+            }
+        });
         orderDetailsTablePanel.setViewportView(orderDetailsTable);
         if (orderDetailsTable.getColumnModel().getColumnCount() > 0) {
             orderDetailsTable.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -1592,9 +1597,34 @@ public class CashierDashboard extends javax.swing.JFrame {
             myMobile.setText(ac.getMobile());
             myAddress.setText(ac.getMobile());
         } catch (SQLException ex) {
-            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_leftHierarchyChanged
+
+    private void orderDetailsTableHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_orderDetailsTableHierarchyChanged
+        // TODO add your handling code here:
+         if ((HierarchyEvent.SHOWING_CHANGED & evt.getChangeFlags()) != 0 && orderDetailsTablePanel.isShowing()) {
+            try {
+                List<SalesController> sales = SalesController.viewSales();
+                DefaultTableModel dtm = (DefaultTableModel) orderDetailsTablePanel.getModel();
+                dtm.setRowCount(0);
+                if (sales != null) {
+                    for (SalesController sale : sales) {
+                        Object[] data = {
+                            sale.getId(),
+                            sale.getName(),
+                            sale.getMobile(),
+                            sale.getAddress(),
+                            sale.getPoints(),
+                        };
+                        dtm.addRow(data);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_orderDetailsTableHierarchyChanged
 
     /**
      * @param args the command line arguments
